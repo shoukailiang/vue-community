@@ -23,11 +23,21 @@ export default {
   ** Global CSS
   */
   css: [
+     // 1. elementui各组件样式
+    'element-ui/lib/theme-chalk/index.css',  
+    // 自适应隐藏显示
+    'element-ui/lib/theme-chalk/display.css',
+    // 自动离主题样式
+    '@/assets/theme/index.css',
+    //  全局自定义样式  
+    '@/assets/css/global.css'
+
   ],
   /*
   ** Plugins to load before mounting the App
   */
   plugins: [
+    '@/plugins/element-ui'
   ],
   /*
   ** Nuxt.js dev-modules
@@ -43,6 +53,8 @@ export default {
   ** Build configuration
   */
   build: {
+    // 4. 将位于node_modules的模块导出  
+    transpile: [/^element-ui/],
     /*
     ** You can extend webpack config here
     */
