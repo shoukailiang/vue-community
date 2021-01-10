@@ -23,8 +23,8 @@ export default {
   ** Global CSS
   */
   css: [
-     // 1. elementui各组件样式
-    'element-ui/lib/theme-chalk/index.css',  
+    // 1. elementui各组件样式
+    'element-ui/lib/theme-chalk/index.css',
     // 自适应隐藏显示
     'element-ui/lib/theme-chalk/display.css',
     // 自动离主题样式
@@ -47,8 +47,24 @@ export default {
   /*
   ** Nuxt.js modules
   */
+  /*
+  ** Nuxt.js modules
+  */
   modules: [
+    '@nuxtjs/axios',
   ],
+  axios: { // 对 象
+    proxy: true, // 开启代理
+    prefix: '/api' // 请求前缀
+
+  },
+  proxy: { // 对 象
+    // 将 /api 替换为 '', 然后代理转发到 target 指定的 url
+    '/api': {
+      target: 'https://mock.mengxuegu.com/mock/5ff2987b5b350029c77ca07f/vue-community', pathRewrite: { '^/api': '' }
+    }
+  }, // 逗 号
+
   /*
   ** Build configuration
   */
@@ -58,7 +74,7 @@ export default {
     /*
     ** You can extend webpack config here
     */
-    extend (config, ctx) {
+    extend(config, ctx) {
     }
   }
 }
