@@ -1,6 +1,10 @@
 
 export default {
   mode: 'universal',
+  env: {
+    // 认证客户端URL， process.env.authURL
+    authURL: process.env.NODE_ENV === 'dev' ? '//localhost:7000': '//login.shoukailiang.com'
+  },
   /*
   ** Headers of the page
   */
@@ -52,6 +56,7 @@ export default {
   */
   modules: [
     '@nuxtjs/axios',
+    'cookie-universal-nuxt', // 针对服务端操作cookie
   ],
   axios: { // 对 象
     proxy: true, // 开启代理

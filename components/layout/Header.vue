@@ -30,13 +30,13 @@
           <!-- 登录、注册/头像 -->
           <div class="nav-sign">
             <el-button type="text">管理后台</el-button>
-            <el-button type="text">登录</el-button>
-            <el-button type="primary" size="small" round>注册</el-button>
+            <el-button v-if="!userInfo" type="text" @click="$store.dispatch('LoginPage')">登录</el-button>
+            <el-button v-if="!userInfo" type="primary" size="small" round>注册</el-button>
           </div>
           <el-dropdown v-if="true" @command="handleCommand">
             <div class="el-dropdown-link">
               <el-avatar
-                src="https://fuss10.elemecdn.com/e/5d/4a731a90594a4af544c0c25941171jpeg.jpeg"
+                :src="userInfo?userInfo.imageUrl:null"
                 icon="el-icon-user-solid"
               >
               </el-avatar>
@@ -45,7 +45,7 @@
               <el-dropdown-item command="article">写文章</el-dropdown-item>
               <el-dropdown-item command="question">提问题</el-dropdown-item>
               <el-dropdown-item command="user">我的主页</el-dropdown-item>
-              <el-dropdown-item command="logout">退出</el-dropdown-item>
+              <el-dropdown-item v-if="userInfo" command="logout">退出</el-dropdown-item>
             </el-dropdown-menu>
           </el-dropdown>
         </el-col>
@@ -55,6 +55,12 @@
 </template>
 <script>
 export default {
+
+  computed:{
+    userInfo(){
+      return this.$store.state.userInfo
+    }
+  },
   methods: {
     // 下拉点击后调用
     handleCommand(command) {

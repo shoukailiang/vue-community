@@ -5,9 +5,9 @@
   "author": "shoukailiang",
   "private": true,
   "scripts": {
-    "dev": "nuxt",
+    "dev": "cross-env NODE_ENV=dev nuxt",
     "build": "nuxt build",
-    "start": "nuxt start",
+    "start": "cross-env NODE_ENV=prod nuxt start",
     "generate": "nuxt generate"
   },
   "dependencies": {
@@ -15,6 +15,8 @@
     "nuxt": "^2.0.0"
   },
   "devDependencies": {
-    "@nuxtjs/axios": "^5.12.5"
+    "@nuxtjs/axios": "^5.12.5",
+    "cookie-universal-nuxt": "^2.1.4",
+    "cross-env": "^7.0.3"
   }
 }
