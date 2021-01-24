@@ -43,6 +43,7 @@ export default {
   plugins: [
     '@/plugins/element-ui',
     '~/plugins/interceptor.js',
+    '@/api/article',
   ],
   /*
   ** Nuxt.js dev-modules

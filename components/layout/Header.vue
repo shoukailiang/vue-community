@@ -20,7 +20,7 @@
             active-text-color="#f45154"
             background-color="#fafafa"
           >
-            <el-menu-item index="/">博客</el-menu-item>
+            <el-menu-item index="/">文章</el-menu-item>
             <el-menu-item index="/question">问答</el-menu-item>
             <el-menu-item index="/label">标签</el-menu-item>
           </el-menu>
