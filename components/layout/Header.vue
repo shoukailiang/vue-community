@@ -31,7 +31,7 @@
           <div class="nav-sign">
             <el-button type="text">管理后台</el-button>
             <el-button v-if="!userInfo" type="text" @click="$store.dispatch('LoginPage')">登录</el-button>
-            <el-button v-if="!userInfo" type="primary" size="small" round>注册</el-button>
+            <el-button v-if="!userInfo" type="primary" size="small" round @click="$store.dispatch('LoginPage')">注册</el-button>
           </div>
           <el-dropdown v-if="true" @command="handleCommand">
             <div class="el-dropdown-link">
@@ -65,6 +65,10 @@ export default {
     // 下拉点击后调用
     handleCommand(command) {
       // this.$message('click on item ' + command)
+      // 未登录跳转登录页
+      if(!this.userInfo){// 调用了计算属性中的方法，如果没有信息，就跳转到登录页
+        return this.$store.dispatch('LoginPage')
+      }
       switch (command) {
         case "article":
           // 打开新窗口
@@ -75,6 +79,10 @@ export default {
           // 打开新窗口
           routeData = this.$router.resolve("/question/edit");
           window.open(routeData.href, "_blank");
+          break;
+        case 'logout':
+          // 触发UserLogout
+          this.$store.dispatch('UserLogout')
           break;
         default:
           break;

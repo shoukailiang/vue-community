@@ -10,6 +10,10 @@
 <script>
 
 export default {
+  async asyncData({$axios}) {
+    const ttt=  await $axios.$get('/test')
+    console.log(ttt)
+  },
 
 }
 </script>
