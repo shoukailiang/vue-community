@@ -16,5 +16,20 @@ export default ({ $axios }, inject) => {
     inject('updateArticleViewCount', id =>
         $axios.$put(`/article/api/article/viewCount/${id}`))
 
+    // 更新点赞数
+    inject('updateArticleThumb', (articleId, count) =>
+        $axios.$put(`/article/article/thumb/${articleId}/${count}`))
+
+    // 通过文章ID查询所有评论数据接口
+    inject('getCommentListByArticleId', articleId =>
+        $axios.$get(`/article/api/comment/list/${articleId}`))
+
+    // 新增文章评论
+    inject('addComment', data => $axios.$post(`/article/comment`, data))
+
+    // 删除评论
+    inject('deleteCommentById', id => $axios.$delete(`/article/comment/${id}`))
+
+
 
 }

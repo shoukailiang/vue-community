@@ -16,7 +16,8 @@
                   <i class="el-icon-user-solid"></i> {{ data.nickName }}
                 </nuxt-link>
                 <span>
-                  <i class="el-icon-date"></i> {{ data.updateDate }}
+                  <i class="el-icon-date"></i>
+                  {{ getDateFormat(data.updateDate) }}
                   <i class="el-icon-thumb"></i> {{ data.thumhup }}
                   <i class="el-icon-view"></i> {{ data.viewCount }}
                 </span>
@@ -36,18 +37,69 @@
               <!-- 1. 加上样式，2 使用 v-html 渲染 -->
               <div class="markdown-body" v-html="data.htmlContent"></div>
             </div>
-            <el-button icon="el-icon-thumb" type="primary" size="medium" plain
+            <!-- plain为true为深色，false不是深色 -->
+            <el-button
+              :disabled="!$store.state.userInfo"
+              @click="handleThumb"
+              :plain="!isThumb"
+              icon="el-icon-thumb"
+              type="primary"
+              size="medium"
               >赞
             </el-button>
           </el-card>
           <!-- 评 论 区 -->
           <div>
             <h2>评论区</h2>
-            <el-card> </el-card>
+            <!-- 未登录 -->
+            <el-card v-if="!$store.state.userInfo">
+              <h4>
+                登录后参与交流、获取后续更新提醒 {{ $store.state.userInfo }}
+              </h4>
+              <div>
+                <!-- 不要以 / 开头，LoginPage -->
+                <el-button
+                  @click="$store.dispatch('LoginPage')"
+                  type="primary"
+                  size="small"
+                >
+                  登录</el-button
+                >
+                <el-button
+                  @click="$store.dispatch('LoginPage')"
+                  type="primary"
+                  size="small"
+                  plain
+                >
+                  注册</el-button
+                >
+              </div>
+            </el-card>
+            <el-card>
+              <!-- userId 当前登录用户id，userImage 当前登录用户头像，showComment 显示评论区
+                doSend 公共评论事件函数，doChidSend 回复评论事件函数, doRemove 删除 -->
+              <my-comment
+                :userId="userId"
+                :userImage="userImage"
+                :authorId="data.userId"
+                :showComment="$store.state.userInfo ? true : false"
+                @doSend="doSend"
+                @doChildSend="doChildSend"
+                @doRemove="doRemove"
+                :commentList="commentList"
+              >
+              </my-comment>
+            </el-card>
           </div>
         </div>
       </el-col>
-      <el-col class="hidden-sm-and-down" :md="6"> 11 </el-col>
+      <el-col class="hidden-sm-and-down" :md="6">
+        <!-- 固钉距离 80px -->
+        <my-affix :offset="80">
+          <!-- parentClass 指定文章内容的父元素class值 -->
+          <my-directory parentClass="article-content"></my-directory>
+        </my-affix>
+      </el-col>
     </el-row>
   </div>
 </template>
@@ -55,8 +107,30 @@
 // 高亮显示md内容样式
 import "@/assets/css/md/github-markdown.css";
 import "@/assets/css/md/github-min.css";
+import { dateFormat } from "@/utils/date";
+// 固 钉
+import MyAffix from "@/components/common/Affix";
+// 生成文章导航目录
+import MyDirectory from "@/components/common/Directory";
+// 评论组件
+import MyComment from "@/components/common/Comment";
 
 export default {
+  components: { MyAffix, MyDirectory, MyComment },
+  data() {
+    return {
+      // 是否已点赞
+      isThumb: this.$cookies.get(`article-thumb-${this.$route.params.id}`)
+        ? this.$cookies.get(`article-thumb-${this.$route.params.id}`)
+        : false,
+      // 当前登录用户id
+      userId: this.$store.state.userInfo && this.$store.state.userInfo.uid,
+      // 当前登录用户头像，
+      userImage:
+        this.$store.state.userInfo && this.$store.state.userInfo.imageUrl,
+    };
+  },
+
   // 校验路由参数
   validate({ params }) {
     // 必须是number类型
@@ -86,7 +160,82 @@ export default {
       app.$cookies.set(`article-view-${data.id}`, true);
     }
 
-    return { data }; //等价于 {data: data}
+    // 通过文章id查询所有评论列表信息
+    const { data: commentList } = await app.$getCommentListByArticleId(
+      params.id
+    );
+    return { data, commentList };
+  },
+  methods: {
+    getDateFormat(date) {
+      return dateFormat(date);
+    },
+    // 点赞
+    async handleThumb() {
+      // 取消点赞或者点赞
+      this.isThumb = !this.isThumb;
+      // 1. 点赞，-1取消赞
+      const count = this.isThumb ? 1 : -1;
+      // 获取文章
+      const articleId = this.$route.params.id;
+      const { code } = await this.$updateArticleThumb(articleId, count);
+      if (code === 20000) {
+        // 更新下当前文章页面显示的点赞数
+        this.data.thumhup = this.data.thumhup + count;
+        // 保存cookie，永久保存
+        this.$cookies.set(
+          `article-thumb-${this.$route.params.id}`,
+          this.isThumb,
+          {
+            maxAge: 60 * 60 * 24 * 365 * 5, // 保存5年
+          }
+        );
+      }
+    },
+    // 公布评论
+    doSend(content) {
+      console.log("公布评论", content);
+      this.doChildSend(content);
+    },
+    // 发布回复评论（回复内容，父评论id)
+    // -1 表示没有父评论  
+    doChildSend(content, parentId = "-1") {
+      console.log("发布回复评论（回复内容，父评论id", content, parentId);
+      const data = {
+        content,
+        parentId,
+        articleId: this.$route.params.id,
+        userId: this.userId,
+        userImage: this.userImage,
+        nickName:
+          this.$store.state.userInfo && this.$store.state.userInfo.nickName,
+      };
+      this.$addComment(data).then((response) => {
+        // 新增评论成功
+        if (response.code === 20000) {
+          // 刷新评论信息
+          this.refreshComment();
+        }
+      });
+    },
+
+    // 删除
+    async doRemove(id) {
+      const { code } = await this.$deleteCommentById(id);
+      if (code === 20000) {
+        // 删除成功，刷新评论
+        this.refreshComment();
+      }
+    },
+
+    // 查询评论列表数据
+    async refreshComment() {
+      console.log("refreshComment");
+      const { data } = await this.$getCommentListByArticleId(
+        this.$route.params.id
+      );
+      this.commentList = data;
+    },
   },
 };
 </script>
