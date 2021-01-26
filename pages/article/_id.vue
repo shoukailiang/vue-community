@@ -21,6 +21,18 @@
                   <i class="el-icon-thumb"></i> {{ data.thumhup }}
                   <i class="el-icon-view"></i> {{ data.viewCount }}
                 </span>
+
+                <!-- 只能自己编辑自己的 -->
+                <nuxt-link
+                  v-if="
+                    $store.state.userInfo &&
+                    $store.state.userInfo.uid === data.userId
+                  "
+                  :to="{ path: '/article/edit', query: { id: data.id } }"
+                  class="nickname"
+                >
+                  &nbsp;&nbsp; 编 辑
+                </nuxt-link>
               </div>
               <!-- 加 style="margin: 5px;" 不然会紧密连接在一起 -->
               <el-tag
@@ -131,7 +143,7 @@ export default {
     };
   },
 
-  // 校验路由参数
+  // 校验路由参数 http://localhost:3000/article/12
   validate({ params }) {
     // 必须是number类型
     return /^\d+$/.test(params.id);
@@ -194,13 +206,13 @@ export default {
     },
     // 公布评论
     doSend(content) {
-      console.log("公布评论", content);
+      // console.log("公布评论", content);
       this.doChildSend(content);
     },
     // 发布回复评论（回复内容，父评论id)
-    // -1 表示没有父评论  
+    // -1 表示没有父评论
     doChildSend(content, parentId = "-1") {
-      console.log("发布回复评论（回复内容，父评论id", content, parentId);
+      // console.log("发布回复评论（回复内容，父评论id", content, parentId);
       const data = {
         content,
         parentId,
@@ -230,7 +242,7 @@ export default {
 
     // 查询评论列表数据
     async refreshComment() {
-      console.log("refreshComment");
+      // console.log("refreshComment");
       const { data } = await this.$getCommentListByArticleId(
         this.$route.params.id
       );

@@ -62,7 +62,7 @@ export default {
     const { data: mainAdvertList } = await app.$getAdvertList(1);
     // 3. 获取课程推荐，位置position=2
     const { data: courseAdvertList } = await app.$getAdvertList(2);
-    console.log("mainAdvertList", mainAdvertList);
+    // console.log("mainAdvertList", mainAdvertList);
     // 简 写 { categoryList: categoryList }
     return { categoryList, mainAdvertList, courseAdvertList };
   },

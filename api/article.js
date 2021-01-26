@@ -30,6 +30,14 @@ export default ({ $axios }, inject) => {
     // 删除评论
     inject('deleteCommentById', id => $axios.$delete(`/article/comment/${id}`))
 
+    // 获取所有正常状态的分类及标签
+    inject('getCategoryAndLabel', () => $axios.$get(`/article/api/category/label/list`))
+
+    // 新增文章
+    inject('addArticle', data => $axios.$post(`/article/article`, data))
+
+    // 更 新
+    inject('updateArticle', data => $axios.$put(`/article/article`, data))
 
 
 }

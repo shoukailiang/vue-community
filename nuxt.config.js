@@ -3,7 +3,7 @@ export default {
   mode: 'universal',
   env: {
     // 认证客户端URL， process.env.authURL
-    authURL: process.env.NODE_ENV === 'dev' ? '//localhost:7000': '//login.shoukailiang.com'
+    authURL: process.env.NODE_ENV === 'dev' ? '//localhost:7000' : '//login.shoukailiang.com'
   },
   /*
   ** Headers of the page
@@ -34,7 +34,10 @@ export default {
     // 自动离主题样式
     '@/assets/theme/index.css',
     //  全局自定义样式  
-    '@/assets/css/global.css'
+    '@/assets/css/global.css',
+    // 加上 mavon-editor 组件要使用的样式 
+    'mavon-editor/dist/css/index.css'
+
 
   ],
   /*
@@ -42,8 +45,12 @@ export default {
   */
   plugins: [
     '@/plugins/element-ui',
-    '~/plugins/interceptor.js',
+    '@/plugins/interceptor.js',
     '@/api/article',
+    '@/api/common',
+    // 客户端渲染，
+    { src: '@/plugins/mavon-editor', mode: 'client' },
+
   ],
   /*
   ** Nuxt.js dev-modules
