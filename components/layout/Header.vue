@@ -30,13 +30,25 @@
           <!-- 登录、注册/头像 -->
           <div class="nav-sign">
             <el-button type="text">管理后台</el-button>
-            <el-button v-if="!userInfo" type="text" @click="$store.dispatch('LoginPage')">登录</el-button>
-            <el-button v-if="!userInfo" type="primary" size="small" round @click="$store.dispatch('LoginPage')">注册</el-button>
+            <el-button
+              v-if="!userInfo"
+              type="text"
+              @click="$store.dispatch('LoginPage')"
+              >登录</el-button
+            >
+            <el-button
+              v-if="!userInfo"
+              type="primary"
+              size="small"
+              round
+              @click="$store.dispatch('LoginPage')"
+              >注册</el-button
+            >
           </div>
           <el-dropdown v-if="true" @command="handleCommand">
             <div class="el-dropdown-link">
               <el-avatar
-                :src="userInfo?userInfo.imageUrl:null"
+                :src="userInfo ? userInfo.imageUrl : null"
                 icon="el-icon-user-solid"
               >
               </el-avatar>
@@ -45,7 +57,9 @@
               <el-dropdown-item command="article">写文章</el-dropdown-item>
               <el-dropdown-item command="question">提问题</el-dropdown-item>
               <el-dropdown-item command="user">我的主页</el-dropdown-item>
-              <el-dropdown-item v-if="userInfo" command="logout">退出</el-dropdown-item>
+              <el-dropdown-item v-if="userInfo" command="logout"
+                >退出</el-dropdown-item
+              >
             </el-dropdown-menu>
           </el-dropdown>
         </el-col>
@@ -55,19 +69,34 @@
 </template>
 <script>
 export default {
+  computed: {
+    userInfo() {
+      return this.$store.state.userInfo;
+    },
+    // 高亮显示哪个导航标签
+    defaultActive() {
+      console.log("this.$route.path", this.$route.matched[0].path);
+      // 是否存在多级子路由, 没有值，则是首页/
+      let routePath = this.$route.matched[0].path || "/";
 
-  computed:{
-    userInfo(){
-      return this.$store.state.userInfo
-    }
+      // 如果是动态路由，则只取前面一级路由 /question/:id
+      if (routePath.indexOf("/", 1) !== -1) {
+        // 截图一级路由，/question
+        routePath = routePath.substring(0, routePath.indexOf("/", 1));
+      }
+
+      // /article 转为 / 属性文章模块
+      return routePath.indexOf("/article") !== -1 ? "/" : routePath;
+    },
   },
   methods: {
     // 下拉点击后调用
     handleCommand(command) {
       // this.$message('click on item ' + command)
       // 未登录跳转登录页
-      if(!this.userInfo){// 调用了计算属性中的方法，如果没有信息，就跳转到登录页
-        return this.$store.dispatch('LoginPage')
+      if (!this.userInfo) {
+        // 调用了计算属性中的方法，如果没有信息，就跳转到登录页
+        return this.$store.dispatch("LoginPage");
       }
       switch (command) {
         case "article":
@@ -80,9 +109,9 @@ export default {
           routeData = this.$router.resolve("/question/edit");
           window.open(routeData.href, "_blank");
           break;
-        case 'logout':
+        case "logout":
           // 触发UserLogout
-          this.$store.dispatch('UserLogout')
+          this.$store.dispatch("UserLogout");
           break;
         default:
           break;

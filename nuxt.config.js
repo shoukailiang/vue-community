@@ -48,6 +48,7 @@ export default {
     '@/plugins/interceptor.js',
     '@/api/article',
     '@/api/common',
+    '@/api/question',
     // 客户端渲染，
     { src: '@/plugins/mavon-editor', mode: 'client' },
 
