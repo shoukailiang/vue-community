@@ -61,6 +61,8 @@
 
 <script>
 export default {
+  // 引用中间件，拦截路由请求，判断是否已经身份认证
+    middleware: 'auth',
   // 校验
   validate({ query }) {
     // 如果有传递id,则是修改

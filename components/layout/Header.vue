@@ -16,7 +16,7 @@
           <el-menu
             mode="horizontal"
             router
-            default-active="/"
+            :default-active="defaultActive"
             active-text-color="#f45154"
             background-color="#fafafa"
           >
@@ -107,6 +107,10 @@ export default {
         case "question":
           // 打开新窗口
           routeData = this.$router.resolve("/question/edit");
+          window.open(routeData.href, "_blank");
+          break;
+        case "user":
+          routeData = this.$router.resolve("/user");
           window.open(routeData.href, "_blank");
           break;
         case "logout":

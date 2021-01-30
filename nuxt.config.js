@@ -49,6 +49,7 @@ export default {
     '@/api/article',
     '@/api/common',
     '@/api/question',
+    '@/api/user',
     // 客户端渲染，
     { src: '@/plugins/mavon-editor', mode: 'client' },
 
