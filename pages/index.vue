@@ -20,7 +20,7 @@
         <div class="article-center">
           <div class="banner">
             <el-carousel height="230px">
-              <el-carousel-item v-for="item in courseAdvertList" :key="item.id">
+              <el-carousel-item v-for="item in mainAdvertList" :key="item.id">
                 <a :href="item.advertUrl" :target="item.advertTarget">
                   <img :src="item.imageUrl" />
                 </a>
@@ -62,7 +62,7 @@ export default {
     const { data: mainAdvertList } = await app.$getAdvertList(1);
     // 3. 获取课程推荐，位置position=2
     const { data: courseAdvertList } = await app.$getAdvertList(2);
-    // console.log("mainAdvertList", mainAdvertList);
+    // console.log("courseAdvertList", courseAdvertList);
     // 简 写 { categoryList: categoryList }
     return { categoryList, mainAdvertList, courseAdvertList };
   },

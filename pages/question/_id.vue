@@ -240,6 +240,7 @@ export default {
         this.$route.params.id
       );
       this.commentList = data;
+      this.mdContent = '';
     },
 
     // 获取问答输入框的内容
