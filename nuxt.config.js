@@ -83,6 +83,10 @@ export default {
       target: 'http://localhost:8002', 
       pathRewrite: { '^/api': '' }
     },
+    '/api/system': {
+      target: 'http://localhost:8003', 
+      pathRewrite: { '^/api': '' }
+    },
     // 将 /api 替换为 '', 然后代理转发到 target 指定的 url
     '/api': {
       target: 'https://mock.mengxuegu.com/mock/5ff2987b5b350029c77ca07f/vue-community', pathRewrite: { '^/api': '' }

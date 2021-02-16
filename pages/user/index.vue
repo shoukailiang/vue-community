@@ -157,6 +157,8 @@ export default {
             this.deleteImg();
             // 回显上传后的图片
             this.userInfo.imageUrl = response.data;
+            // 将用户头像url更新到数据库中
+            this.$updateUserInfo(this.userInfo)
           }
         })
         .catch(() => {
