@@ -71,7 +71,8 @@ export default {
     async load() {
       // 加载中
       this.loading = true;
-      //	将 页 码 加 1 this.query.current++
+      //	将 页 码 加 1 
+      this.query.current++
       const { data } = await this.$getArticleList(this.query);
       // 有数据
       if (data.records && data.records.length > 0) {

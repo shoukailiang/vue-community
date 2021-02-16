@@ -38,7 +38,7 @@
           shadow="hover"
           :body-style="{ padding: '10px' }"
         >
-          <p>课程推荐</p>
+          <p>经典推荐</p>
           <el-carousel height="210px">
             <el-carousel-item v-for="item in courseAdvertList" :key="item.id">
               <a :href="item.advertUrl" :target="item.advertTarget">
@@ -60,7 +60,7 @@ export default {
     const { data: categoryList } = await app.$getCategoryList();
     // 2. 获取滚动图广告，位置position=1
     const { data: mainAdvertList } = await app.$getAdvertList(1);
-    // 3. 获取课程推荐，位置position=2
+    // 3. 获取经典推荐，位置position=2
     const { data: courseAdvertList } = await app.$getAdvertList(2);
     // console.log("courseAdvertList", courseAdvertList);
     // 简 写 { categoryList: categoryList }
