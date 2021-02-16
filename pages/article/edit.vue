@@ -146,6 +146,9 @@ export default {
       },
       formData: {
         imageUrl: null, // 写出来，不写出来不会被渲染图片
+        userId: this.$store.state.userInfo.uid, // 在提问题中，修复了此bug，要提交当前用户信息
+        userImage: this.$store.state.userInfo.imageUrl,
+        nickName: this.$store.state.userInfo.nickName
       },
       disabled: false, // 标签选择框： false可以选择，true不可选择
       // labelOptions: [

@@ -29,7 +29,7 @@
         <el-col class="nav-right" :xs="18" :sm="18" :md="8">
           <!-- 登录、注册/头像 -->
           <div class="nav-sign">
-            <el-button type="text">管理后台</el-button>
+            <!-- <el-button type="text">管理后台</el-button> -->
             <el-button
               v-if="!userInfo"
               type="text"
