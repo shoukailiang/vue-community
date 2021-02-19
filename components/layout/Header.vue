@@ -25,8 +25,22 @@
             <el-menu-item index="/label">标签</el-menu-item>
           </el-menu>
         </el-col>
+        <!-- 搜索 -->
+        <el-col class="hidden-sm-and-down" :md="6">
+          <el-autocomplete
+            class="inline-input"
+            v-model="state1"
+            :fetch-suggestions="querySearch"
+            placeholder="输入您想搜索的文章"
+            @select="handleSelect"
+            @change="getSearchText"
+          >
+          </el-autocomplete>
+          <el-button icon="el-icon-search" @click="handleSearch"></el-button>
+        </el-col>
+        
         <!-- 登录、注册/头像 手机与平板坚屏都占18格，其他占8格式-->
-        <el-col class="nav-right" :xs="18" :sm="18" :md="8">
+        <el-col class="nav-right" :xs="18" :sm="18" :md="2">
           <!-- 登录、注册/头像 -->
           <div class="nav-sign">
             <!-- <el-button type="text">管理后台</el-button> -->
@@ -69,13 +83,26 @@
 </template>
 <script>
 export default {
+  data() {
+    return{
+      // 搜索
+      articleData: [],
+      state1: '',
+      item:"",
+      searchReq:{
+        title:"",
+        current:1,
+        size:20
+      }
+    }
+  },
   computed: {
     userInfo() {
       return this.$store.state.userInfo;
     },
     // 高亮显示哪个导航标签
     defaultActive() {
-      console.log("this.$route.path", this.$route.matched[0].path);
+      // console.log("this.$route.path", this.$route.matched[0].path);
       // 是否存在多级子路由, 没有值，则是首页/
       let routePath = this.$route.matched[0].path || "/";
 
@@ -121,7 +148,37 @@ export default {
           break;
       }
     },
+    // 搜索
+    querySearch(queryString, cb) {
+        var articleData = this.articleData;
+        var results = queryString ? articleData.filter(this.createFilter(queryString)) : articleData;
+        // 调用 callback 返回建议列表的数据
+        cb(results);
+      },
+      createFilter(queryString) {
+        return (articleData) => {
+          return (articleData.value.toLowerCase().indexOf(queryString.toLowerCase()) === 0);
+        };
+      },
+      loadAll() {
+        return [
+          { "value": "java" },
+          { "value": "spring"},
+        ];
+      },
+      handleSelect(item) {
+        this.item= item;
+      },
+      async handleSearch(){
+        this.$router.push({ path: 'search', query: { title: `${this.searchReq.title}`,current:`${this.searchReq.current}`,size:`${this.searchReq.size}` }})
+      },
+      getSearchText(data){
+          this.searchReq.title = data;
+      }
   },
+  mounted() {
+      this.articleData = this.loadAll();
+  }
 };
 </script>
 

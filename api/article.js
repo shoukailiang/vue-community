@@ -40,4 +40,7 @@ export default ({ $axios }, inject) => {
     inject('updateArticle', data => $axios.$put(`/article/article`, data))
 
 
+    // 前端页面搜索
+    inject('searchArticle', data => $axios.$get(`/article/api/article/search/${data.title}/${data.current}/${data.size}`, data))
+
 }
