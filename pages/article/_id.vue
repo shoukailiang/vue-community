@@ -111,6 +111,12 @@
           <!-- parentClass 指定文章内容的父元素class值 -->
           <my-directory parentClass="article-content"></my-directory>
         </my-affix>
+        <my-affix :offset="480" style="padding-top:20px">
+          <!--作者-->
+          <Author
+            :user="data"
+          />
+        </my-affix>
       </el-col>
     </el-row>
   </div>
@@ -127,8 +133,10 @@ import MyDirectory from "@/components/common/Directory";
 // 评论组件
 import MyComment from "@/components/common/Comment";
 
+import Author from '@/components/user/Author'
+
 export default {
-  components: { MyAffix, MyDirectory, MyComment },
+  components: { MyAffix, MyDirectory, MyComment,Author },
   data() {
     return {
       // 是否已点赞
@@ -140,6 +148,9 @@ export default {
       // 当前登录用户头像，
       userImage:
         this.$store.state.userInfo && this.$store.state.userInfo.imageUrl,
+      topicUser: {
+        
+      },
     };
   },
 

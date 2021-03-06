@@ -40,7 +40,7 @@
         </el-col>
         
         <!-- 登录、注册/头像 手机与平板坚屏都占18格，其他占8格式-->
-        <el-col class="nav-right" :xs="18" :sm="18" :md="2">
+        <el-col class="nav-right" :xs="18" :sm="18" :md="3">
           <!-- 登录、注册/头像 -->
           <div class="nav-sign">
             <!-- <el-button type="text">管理后台</el-button> -->
@@ -59,7 +59,7 @@
               >注册</el-button
             >
           </div>
-          <el-dropdown v-if="true" @command="handleCommand">
+          <el-dropdown v-if="userInfo" @command="handleCommand">
             <div class="el-dropdown-link">
               <el-avatar
                 :src="userInfo ? userInfo.imageUrl : null"
@@ -67,7 +67,7 @@
               >
               </el-avatar>
             </div>
-            <el-dropdown-menu slot="dropdown">
+            <el-dropdown-menu slot="dropdown" >
               <el-dropdown-item command="article">写文章</el-dropdown-item>
               <el-dropdown-item command="question">提问题</el-dropdown-item>
               <el-dropdown-item command="user">我的主页</el-dropdown-item>
