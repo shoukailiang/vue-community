@@ -4,7 +4,17 @@
       <div slot="header">
         <span class="has-text-weight-bold">👨‍💻 关于作者</span>
       </div>
-        {{user.nickName}}
+      {{ user.nickName }}
+      <el-row>
+        <el-button
+          :disabled="!$store.state.userInfo"
+          :plain="!isFocus"
+          @click="handleFocus"
+          type="primary"
+          size="medium"
+          >关注
+        </el-button>
+      </el-row>
     </el-card>
   </section>
 </template>
@@ -16,6 +26,16 @@ export default {
       type: Object,
     },
   },
+  methods:{
+    async handleFocus() {
+
+    }
+  },
+  data(){
+    return{
+      isFocus:false
+    }
+  }
 };
 </script>
 
