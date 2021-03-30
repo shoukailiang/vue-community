@@ -16,7 +16,7 @@
             <div v-if="item.userId === authorId" class="icon author">
               {{ label }}
             </div>
-            <div class="date">{{ item.createDate }}</div>
+            <div class="date">{{ getDateFormat(item.createDate) }}</div>
           </div>
         </div>
 
@@ -135,6 +135,7 @@
 </template>
 
 <script>
+import { dateFormat } from "@/utils/date";
 export default {
   name: "List",
   props: {
@@ -362,6 +363,10 @@ export default {
 
     pBodyStatus(index) {
       this.$set(this.pBodyMap, index, !this.pBodyMap[index]);
+    },
+    // 格式化日期
+    getDateFormat(date) {
+      return dateFormat(date);
     },
   },
   watch: {
