@@ -115,7 +115,7 @@ export default {
   },
 };
 </script>
- <style >
+<style>
 .el-card__body {
   padding: 10px 10px;
 }

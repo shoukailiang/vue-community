@@ -25,6 +25,14 @@
           <span class="meta-block">用户名：</span>
           <span class="name">{{ userInfo.username }}</span>
         </div>
+        <div>
+          <span class="meta-block">关注数：</span>
+          <span class="name">{{ userIdNum }}</span>
+        </div>
+        <div>
+          <span class="meta-block">粉丝数：</span>
+          <span class="name">{{ focusIdNum }}</span>
+        </div>
       </div>
     </el-row>
     <el-row>
@@ -157,7 +165,7 @@ export default {
             // 回显上传后的图片
             this.userInfo.imageUrl = response.data;
             // 将用户头像url更新到数据库中
-            this.$updateUserInfo(this.userInfo)
+            this.$updateUserInfo(this.userInfo);
           }
         })
         .catch(() => {
@@ -214,6 +222,8 @@ export default {
     // 1. 查询用户信息
     const userId = store.state.userInfo && store.state.userInfo.uid;
     const { data: userInfo } = await app.$getUserInfo(userId);
+    const { data: userIdNum } = await app.$getUserId(userId);
+    const { data: focusIdNum } = await app.$getFocusId(userId);
 
     // 2. 查询公开文章列表
     const query = {
@@ -225,19 +235,21 @@ export default {
     };
     const { data } = await app.$findUserArticle(query);
     query.total = data.total;
-    return { userInfo, query, articleList: data.records };
+    return { userInfo, query, articleList: data.records,userIdNum,focusIdNum };
   },
 };
 </script>
 <style scoped>
 .main-top {
   padding: 30px 0;
+  display: flex;
+  align-items: center;
 }
 .avatar {
   float: left;
 }
 .info {
-  margin: 30px 0 0 140px;
+  margin-left: 20px;
 }
 .info .name {
   font-size: 18px;

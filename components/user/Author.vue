@@ -22,24 +22,23 @@
 
 <script>
 export default {
-  
   async created() {
     var focusData = {
       name: 111,
     };
-    // 取消关注或者关注
-    this.isFocus = !this.isFocus;
     // 1. 取消关注，-1关注
     focusData.userId = this.$store.state.userInfo
       ? this.$store.state.userInfo.uid
       : "";
     focusData.focusId = this.user ? this.user.id : "";
     // 查询分类和标签
-    const { data } = await this.$isFocus(focusData);
-    if (data) {
-      this.isFocus = true;
-    } else {
-      this.isFocus = false;
+    if (this.$store.state.userInfo) {
+      const { data } = await this.$isFocus(focusData);
+      if (data) {
+        this.isFocus = true;
+      } else {
+        this.isFocus = false;
+      }
     }
   },
   props: {

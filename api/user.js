@@ -16,4 +16,19 @@ export default ({ $axios }, inject) => {
     inject('checkOldPassword', data => $axios.$post('/system/user/check/password', data))
     // 提交修改密码
     inject('updatePassword', data => $axios.$put('/system/user/password', data))
+
+    // 关注用户
+    inject('focusUser', data => $axios.$post(`/system/focus`, data))
+
+    // 查询是否关注
+    inject('isFocus', data => $axios.$post(`/system/focus/isfocus`, data))
+
+    // 查询已关注的
+    inject('getUserId', id => $axios.$get(`/system/focus/userId/${id}`))
+
+
+     // 查询粉丝
+    inject('getFocusId', id => $axios.$get(`/system/focus/focusId/${id}`))
+
+
 }
