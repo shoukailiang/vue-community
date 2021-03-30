@@ -12,7 +12,8 @@
           @click="handleFocus"
           type="primary"
           size="medium"
-          >关注
+        >
+          {{ this.isFocus ? "已关注" : "关注" }}
         </el-button>
       </el-row>
     </el-card>
@@ -21,21 +22,59 @@
 
 <script>
 export default {
+  
+  async created() {
+    var focusData = {
+      name: 111,
+    };
+    // 取消关注或者关注
+    this.isFocus = !this.isFocus;
+    // 1. 取消关注，-1关注
+    focusData.userId = this.$store.state.userInfo
+      ? this.$store.state.userInfo.uid
+      : "";
+    focusData.focusId = this.user ? this.user.id : "";
+    // 查询分类和标签
+    const { data } = await this.$isFocus(focusData);
+    if (data) {
+      this.isFocus = true;
+    } else {
+      this.isFocus = false;
+    }
+  },
   props: {
     user: {
       type: Object,
     },
   },
-  methods:{
-    async handleFocus() {
-
-    }
+  data() {
+    return {
+      isFocus: false,
+      isFocusData: "",
+    };
   },
-  data(){
-    return{
-      isFocus:false
-    }
-  }
+  methods: {
+    async handleFocus() {
+      var focusData = {
+        name: 111,
+      };
+      // 取消关注或者关注
+      this.isFocus = !this.isFocus;
+      focusData.userId = this.$store.state.userInfo
+        ? this.$store.state.userInfo.uid
+        : "";
+      focusData.focusId = this.user ? this.user.id : "";
+      const { code } = await this.$focusUser(focusData);
+      if (code === 20000) {
+        console.log("关注成功");
+      }
+    },
+  },
+  data() {
+    return {
+      isFocus: false,
+    };
+  },
 };
 </script>
 

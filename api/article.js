@@ -43,4 +43,10 @@ export default ({ $axios }, inject) => {
     // 前端页面搜索
     inject('searchArticle', data => $axios.$get(`/article/api/article/search/${data.title}/${data.current}/${data.size}`, data))
 
+    // 关注用户
+    inject('focusUser', data => $axios.$post(`/system/focus`,data))
+
+    // 查询是否关注
+    inject('isFocus', data => $axios.$post(`/system/focus/isfocus`,data))
+
 }
