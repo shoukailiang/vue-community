@@ -170,7 +170,7 @@ export default {
         this.item= item;
       },
       async handleSearch(){
-        this.$router.push({ path: 'search', query: { title: `${this.searchReq.title}`,current:`${this.searchReq.current}`,size:`${this.searchReq.size}` }})
+        this.$router.push({ path: '/search', query: { title: `${this.searchReq.title}`,current:`${this.searchReq.current}`,size:`${this.searchReq.size}` }})
       },
       getSearchText(data){
           this.searchReq.title = data;
