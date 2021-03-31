@@ -364,7 +364,7 @@ export default {
     pBodyStatus(index) {
       this.$set(this.pBodyMap, index, !this.pBodyMap[index]);
     },
-    // 格式化日期
+        // 格式化日期
     getDateFormat(date) {
       return dateFormat(date);
     },

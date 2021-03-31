@@ -185,7 +185,6 @@ export default {
     async submitUserForm() {
       this.loading = true;
       // 提交修改的个人信息
-      this.userInfo;
       const { code, message } = await this.$updateUserInfo(this.userInfo);
       if (code === 20000) {
         this.$message.success("修改成功");
