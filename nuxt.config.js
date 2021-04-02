@@ -50,6 +50,7 @@ export default {
     '@/api/common',
     '@/api/question',
     '@/api/user',
+    '@/api/statistics',
     // 客户端渲染，
     { src: '@/plugins/mavon-editor', mode: 'client' },
 

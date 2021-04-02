@@ -48,6 +48,25 @@
             </el-carousel-item>
           </el-carousel>
         </el-card>
+
+        <el-divider>热门文章</el-divider>
+        <el-table
+          class="label-list"
+          :show-header="false"
+          :data="hotArticleList"
+          style="width: 100%"
+        >
+          <el-table-column type="index" width="50"> </el-table-column>
+          <el-table-column>
+            <template slot-scope="scope" width="100">
+              <span class="title">
+                <nuxt-link :to="'/article/' + scope.row.id" target="_blank">
+                  {{ scope.row.title }}
+                </nuxt-link>
+              </span>
+            </template>
+          </el-table-column>
+        </el-table>
       </el-col>
     </el-row>
   </div>
@@ -64,7 +83,8 @@ export default {
     const { data: courseAdvertList } = await app.$getAdvertList(2);
     // console.log("courseAdvertList", courseAdvertList);
     // 简 写 { categoryList: categoryList }
-    return { categoryList, mainAdvertList, courseAdvertList };
+    const { data: hotArticleList } = await app.$hotArticleList();
+    return { categoryList, mainAdvertList, courseAdvertList, hotArticleList };
   },
 };
 </script>

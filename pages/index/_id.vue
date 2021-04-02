@@ -59,7 +59,6 @@
 </template>
 
 <script>
-import api from "@/api/article";
 export default {
   data() {
     return {

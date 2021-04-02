@@ -43,5 +43,7 @@ export default ({ $axios }, inject) => {
     // 前端页面搜索
     inject('searchArticle', data => $axios.$get(`/article/api/article/search/${data.title}/${data.current}/${data.size}`, data))
 
+    // 热门文章
+    inject('hotArticleList', () => $axios.$get(`/article/api/article/hotlist`))
 
 }
