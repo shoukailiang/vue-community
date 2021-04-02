@@ -46,4 +46,8 @@ export default ({ $axios }, inject) => {
     // 热门文章
     inject('hotArticleList', () => $axios.$get(`/article/api/article/hotlist`))
 
+    // 热门标签
+    inject('hotTagList', () => $axios.$get(`/article/api/label/hottag`))
+
+
 }

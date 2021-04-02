@@ -32,7 +32,18 @@
       </el-col>
       <el-col :span="6">
         <el-divider>热门标签</el-divider>
-        111
+        <div class="tag-con">
+          <nuxt-link
+            :to="{
+              path: `/label/${label.id}`,
+              query: { name: label.name },
+            }"
+            v-for="label in hotTagList"
+            :key="label.id"
+          >
+            <el-tag size="small">{{ label.name }}</el-tag>
+          </nuxt-link>
+        </div>
       </el-col>
     </el-row>
   </div>
@@ -43,8 +54,10 @@ export default {
   async asyncData({ app }) {
     // 查询分类和标签
     const { data } = await app.$getCategoryAndLabel();
+    const { data: hotTagList } = await app.$hotTagList();
+
     // console.log(data)
-    return { data };
+    return { data, hotTagList };
   },
 };
 </script>
@@ -63,5 +76,8 @@ export default {
 }
 .el-card {
   height: 200px;
+}
+.tag-con{
+  padding: 20px;
 }
 </style>
