@@ -3,12 +3,10 @@
     <!-- 个人信息 -->
     <el-row class="main-top">
       <div class="avatar">
-        <el-tooltip content="点击上传头像" effect="light">
-          <el-upload accept="image/*" action="" :show-file-list="false">
-            <el-avatar :size="120" :src="this.userInfo.imageUrl">{{
-              userInfo.nickName
-            }}</el-avatar>
-          </el-upload>
+        <el-tooltip content="头像" effect="light">
+          <el-avatar :size="120" :src="this.userInfo.imageUrl">{{
+            userInfo.nickName
+          }}</el-avatar>
         </el-tooltip>
       </div>
       <div class="info">

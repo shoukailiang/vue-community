@@ -99,7 +99,7 @@ export default {
     const categoryId = params.id ? params.id : null;
 
     // 获取文章列表
-    const query = { categoryId, current: 1, size: 20 };
+    const query = { categoryId, current: 1, size: 8 };
     const { data } = await app.$getArticleList(query);
     return { query, articleList: data.records };
   },
