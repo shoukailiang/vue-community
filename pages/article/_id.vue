@@ -57,6 +57,7 @@
               icon="el-icon-thumb"
               type="primary"
               size="medium"
+              class="zan"
               >赞
             </el-button>
           </el-card>
@@ -264,4 +265,7 @@ export default {
 </script>
 <style scoped>
 @import "@/assets/css/article/article.css";
+.zan{
+  margin-top: 20px;
+}
 </style>

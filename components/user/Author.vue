@@ -26,12 +26,10 @@ export default {
     var focusData = {
       name: 111,
     };
-    // 1. 取消关注，-1关注
     focusData.userId = this.$store.state.userInfo
       ? this.$store.state.userInfo.uid
       : "";
     focusData.focusId = this.user ? this.user.id : "";
-    // 查询分类和标签
     if (this.$store.state.userInfo) {
       const { data } = await this.$isFocus(focusData);
       if (data) {

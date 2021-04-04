@@ -11,7 +11,7 @@
         </el-col>
         <!-- 导航菜单， 手机与平板坚屏都占0格，也就是隐藏，其他10格-->
         <!-- <el-col :xs="0" :sm="0" :md="10"> 不行，隐藏后放大不显示 -->
-        <el-col class="hidden-sm-and-down" :md="10">
+        <el-col class="hidden-sm-and-down" :md="8">
           <!-- 导航菜单 ，horizontal 水平， router 开启 index 指定路由地址， default-active默认哪个被选中-->
           <el-menu
             mode="horizontal"
@@ -39,9 +39,13 @@
           </el-autocomplete>
           <el-button icon="el-icon-search" @click="handleSearch"></el-button>
         </el-col>
-        
+
         <!-- 登录、注册/头像 手机与平板坚屏都占18格，其他占8格式-->
-        <el-col class="nav-right" :xs="18" :sm="18" :md="3">
+        <el-col class="nav-right" :xs="10" :sm="10" :md="3">
+          <div class="message-container">
+            <i class="el-icon-bell message-icon" ></i>
+            <span class="message-info" v-if="false"></span>
+          </div>
           <!-- 登录、注册/头像 -->
           <div class="nav-sign">
             <!-- <el-button type="text">管理后台</el-button> -->
@@ -68,7 +72,7 @@
               >
               </el-avatar>
             </div>
-            <el-dropdown-menu slot="dropdown" >
+            <el-dropdown-menu slot="dropdown">
               <el-dropdown-item command="article">写文章</el-dropdown-item>
               <el-dropdown-item command="question">提问题</el-dropdown-item>
               <el-dropdown-item command="user">我的主页</el-dropdown-item>
@@ -85,17 +89,17 @@
 <script>
 export default {
   data() {
-    return{
+    return {
       // 搜索
       articleData: [],
-      state1: '',
-      item:"",
-      searchReq:{
-        title:"",
-        current:1,
-        size:20
-      }
-    }
+      state1: "",
+      item: "",
+      searchReq: {
+        title: "",
+        current: 1,
+        size: 20,
+      },
+    };
   },
   computed: {
     userInfo() {
@@ -151,35 +155,44 @@ export default {
     },
     // 搜索
     querySearch(queryString, cb) {
-        var articleData = this.articleData;
-        var results = queryString ? articleData.filter(this.createFilter(queryString)) : articleData;
-        // 调用 callback 返回建议列表的数据
-        cb(results);
-      },
-      createFilter(queryString) {
-        return (articleData) => {
-          return (articleData.value.toLowerCase().indexOf(queryString.toLowerCase()) === 0);
-        };
-      },
-      loadAll() {
-        return [
-          { "value": "java" },
-          { "value": "spring"},
-        ];
-      },
-      handleSelect(item) {
-        this.item= item;
-      },
-      async handleSearch(){
-        this.$router.push({ path: '/search', query: { title: `${this.searchReq.title}`,current:`${this.searchReq.current}`,size:`${this.searchReq.size}` }})
-      },
-      getSearchText(data){
-          this.searchReq.title = data;
-      }
+      var articleData = this.articleData;
+      var results = queryString
+        ? articleData.filter(this.createFilter(queryString))
+        : articleData;
+      // 调用 callback 返回建议列表的数据
+      cb(results);
+    },
+    createFilter(queryString) {
+      return (articleData) => {
+        return (
+          articleData.value.toLowerCase().indexOf(queryString.toLowerCase()) ===
+          0
+        );
+      };
+    },
+    loadAll() {
+      return [{ value: "java" }, { value: "spring" }];
+    },
+    handleSelect(item) {
+      this.item = item;
+    },
+    async handleSearch() {
+      this.$router.push({
+        path: "/search",
+        query: {
+          title: `${this.searchReq.title}`,
+          current: `${this.searchReq.current}`,
+          size: `${this.searchReq.size}`,
+        },
+      });
+    },
+    getSearchText(data) {
+      this.searchReq.title = data;
+    },
   },
   mounted() {
-      this.articleData = this.loadAll();
-  }
+    this.articleData = this.loadAll();
+  },
 };
 </script>
 
@@ -212,6 +225,8 @@ export default {
 
 /* 导航右侧 */
 .nav-right {
+  display: flex;
+  justify-content: space-between;
   text-align: right;
 }
 .nav-sign {
@@ -223,5 +238,27 @@ export default {
 /* 防止点击头像有边框 */
 div:focus {
   outline: none;
+}
+.message-icon {
+  padding: 10px;
+  font-size: 28px;
+
+}
+.message-icon:hover{
+  color: #f45154;
+  cursor: pointer;
+}
+.message-container{
+  position: relative;
+}
+.message-container span{
+  position: absolute;
+  top: 6px;
+  right: 8px;
+  display: block;
+  width: 14px;
+  height: 14px;
+  background: #f45154;
+  border-radius: 14px;
 }
 </style>

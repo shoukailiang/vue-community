@@ -18,6 +18,14 @@
           <span class="meta-block">用户名：</span>
           <span class="name">{{ userInfo.username }}</span>
         </div>
+        <div>
+          <span class="meta-block">关注数：</span>
+          <span class="name">{{ userIdNum }}</span>
+        </div>
+        <div>
+          <span class="meta-block">粉丝数：</span>
+          <span class="name">{{ focusIdNum }}</span>
+        </div>
       </div>
     </el-row>
     <el-row>
@@ -31,7 +39,7 @@
           />
         </el-tab-pane>
 
-        <el-tab-pane label="我的提问" name="question">
+        <el-tab-pane label="ta的提问" name="question">
           <question-list
             name="question"
             :page="query"
@@ -118,6 +126,8 @@ export default {
     // 1. 查询用户信息
     const userId = params.id;
     const { data: userInfo } = await app.$getUserInfo(userId);
+    const { data: userIdNum } = await app.$getUserId(userId);
+    const { data: focusIdNum } = await app.$getFocusId(userId);
 
     // 2. 查询公开文章列表
     const query = {
@@ -129,7 +139,7 @@ export default {
     };
     const { data } = await app.$findUserArticle(query);
     query.total = data.total;
-    return { userInfo, query, articleList: data.records };
+    return { userInfo, query, articleList: data.records,userIdNum,focusIdNum };
   },
 };
 </script>
