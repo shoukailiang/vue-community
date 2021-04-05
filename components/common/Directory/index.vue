@@ -110,7 +110,7 @@ export default {
       document.getElementById("tree").scrollTop = nodeTop - 100;
     },
     check(a, b) {
-      console.log("check", a, b);
+      //console.log("check", a, b);
     },
   },
 };

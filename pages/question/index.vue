@@ -44,7 +44,7 @@ export default {
     const page = {
       total: 0, // 总记录数
       current: 1, // 当前页码
-      size: 20, // 每页显示20条数据
+      size: 8, // 每页显示8条数据
     };
     // 查询热门问答
     const { data } = await app.$getHotList(page);

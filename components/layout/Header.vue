@@ -40,12 +40,13 @@
           <el-button icon="el-icon-search" @click="handleSearch"></el-button>
         </el-col>
 
+        <el-col :md="1" class="message-icon-container">
+          <el-badge :value="20" :max="99" class="item">
+            <i class="el-icon-message message-icon" ></i>
+          </el-badge>
+        </el-col>
         <!-- 登录、注册/头像 手机与平板坚屏都占18格，其他占8格式-->
         <el-col class="nav-right" :xs="10" :sm="10" :md="3">
-          <div class="message-container">
-            <i class="el-icon-bell message-icon" ></i>
-            <span class="message-info" v-if="false"></span>
-          </div>
           <!-- 登录、注册/头像 -->
           <div class="nav-sign">
             <!-- <el-button type="text">管理后台</el-button> -->
@@ -239,26 +240,15 @@ export default {
 div:focus {
   outline: none;
 }
-.message-icon {
-  padding: 10px;
-  font-size: 28px;
-
+.message-icon-container{
+  display: flex;
+  align-items: center;
 }
-.message-icon:hover{
+.message-icon {
+  font-size: 28px;
+}
+.message-icon:hover {
   color: #f45154;
   cursor: pointer;
-}
-.message-container{
-  position: relative;
-}
-.message-container span{
-  position: absolute;
-  top: 6px;
-  right: 8px;
-  display: block;
-  width: 14px;
-  height: 14px;
-  background: #f45154;
-  border-radius: 14px;
 }
 </style>
