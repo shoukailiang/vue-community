@@ -116,6 +116,7 @@
           <!--作者-->
           <Author
             :user="data"
+            v-if="$store.state.userInfo.uid!==data.userId"
           />
         </my-affix>
       </el-col>

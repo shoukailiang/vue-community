@@ -178,6 +178,10 @@ export default {
       this.item = item;
     },
     async handleSearch() {
+      if(this.searchReq.title===""){
+        this.$message.error("请输入内容");
+        return;
+      }
       this.$router.push({
         path: "/search",
         query: {
