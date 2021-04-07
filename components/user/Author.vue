@@ -68,11 +68,6 @@ export default {
       }
     },
   },
-  data() {
-    return {
-      isFocus: false,
-    };
-  },
 };
 </script>
 

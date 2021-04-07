@@ -75,6 +75,16 @@
             @submitForm="submitPasswordForm"
           />
         </el-tab-pane>
+        <el-tab-pane label="我的粉丝" name="fans">
+          <user-list
+            :Data="FansData"
+          />
+        </el-tab-pane>
+        <el-tab-pane label="我的关注" name="focus">
+          <user-list
+            :Data="FocusData"
+          />
+        </el-tab-pane>
       </el-tabs>
     </el-row>
   </div>
@@ -84,11 +94,12 @@ import ArticleList from "@/components/article/List";
 import QuestionList from "@/components/question/List";
 import UserEdit from "@/components/user/Edit";
 import UserPassword from "@/components/user/Password";
+import UserList from "@/components/user/UserList";
 
 export default {
   // 引用中间件，拦截路由请求，判断是否已经身份认证
   middleware: "auth",
-  components: { QuestionList, ArticleList, UserEdit, UserPassword },
+  components: { QuestionList, ArticleList, UserEdit, UserPassword, UserList },
 
   data() {
     return {
@@ -101,6 +112,8 @@ export default {
         userId: this.$store.state.userInfo && this.$store.state.userInfo.uid,
       },
       questionList: [], // 提问列表
+      FocusData: [],
+      FansData: [],
     };
   },
   methods: {
@@ -132,6 +145,18 @@ export default {
       this.articleList = data.records;
     },
 
+    async getMyFans(paneName,id){
+      const userId = this.$store.state.userInfo && this.$store.state.userInfo.uid;
+      const { data } = await this.$getMyFans(userId);
+      this.FansData = data;
+    },
+
+    async getMyFocus(paneName,id){
+      const userId = this.$store.state.userInfo && this.$store.state.userInfo.uid;
+      const { data } = await this.$getMyFocus(userId);
+      this.FocusData = data;
+    },
+
     // 切换标签页
     handleClick(tab, event) {
       switch (tab.paneName) {
@@ -145,6 +170,12 @@ export default {
           break;
         case "question":
           this.findUserQuestionList(tab.paneName, 1);
+          break;
+        case "fans":
+          this.getMyFans(tab.paneName, 1);
+          break;
+        case "focus":
+          this.getMyFocus(tab.paneName, 1);
           break;
         case "user":
           // 用户不用查询，在加载此页面时已经查询了
@@ -234,7 +265,13 @@ export default {
     };
     const { data } = await app.$findUserArticle(query);
     query.total = data.total;
-    return { userInfo, query, articleList: data.records,userIdNum,focusIdNum };
+    return {
+      userInfo,
+      query,
+      articleList: data.records,
+      userIdNum,
+      focusIdNum,
+    };
   },
 };
 </script>
