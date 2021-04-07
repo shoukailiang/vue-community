@@ -29,7 +29,7 @@ export default {
     focusData.userId = this.$store.state.userInfo
       ? this.$store.state.userInfo.uid
       : "";
-    focusData.focusId = this.user ? this.user.id : "";
+    focusData.focusId = this.user ? this.user.userId : "";
     if (this.$store.state.userInfo) {
       const { data } = await this.$isFocus(focusData);
       if (data) {
@@ -60,7 +60,8 @@ export default {
       focusData.userId = this.$store.state.userInfo
         ? this.$store.state.userInfo.uid
         : "";
-      focusData.focusId = this.user ? this.user.id : "";
+        console.log(this.user)
+      focusData.focusId = this.user ? this.user.userId : "";
       const { code } = await this.$focusUser(focusData);
       if (code === 20000) {
         console.log("关注成功");

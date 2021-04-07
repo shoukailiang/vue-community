@@ -53,6 +53,7 @@
               type="primary"
               size="medium"
               :plain="!isThumb"
+              class="zan"
             >
               赞
             </el-button>
@@ -308,4 +309,7 @@ export default {
 
 <style scoped>
 @import "@/assets/css/article/article.css";
+.zan{
+  margin-top: 20px;
+}
 </style>
