@@ -23,7 +23,6 @@
             <el-menu-item index="/">文章</el-menu-item>
             <el-menu-item index="/question">问答</el-menu-item>
             <el-menu-item index="/label">标签</el-menu-item>
-            <el-menu-item index="/statistics">数据统计</el-menu-item>
           </el-menu>
         </el-col>
         <!-- 搜索 -->
