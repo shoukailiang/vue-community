@@ -6,8 +6,8 @@
       :key="index"
       :offset="index > 0 ? 1 : 0"
     >
-      <el-card :body-style="{ padding: '0px' }">
-        <img :src="item.imageUrl" class="image" />
+      <el-card :body-style="{ padding: '0px' }" class="avatar-container">
+        <el-avatar shape="circle" :size="100"  :src="item.imageUrl"></el-avatar>
         <div style="padding: 14px">
           <nuxt-link :to="'/user/' + item.id" target="_blank" class="nickname">
             {{ item.nickName }}
@@ -48,9 +48,13 @@ export default {
   float: right;
 }
 
-.image {
-  width: 100%;
-  display: block;
+.avatar-container{
+  display: flex;
+  justify-content: center;
+}
+
+.avatar-container div{
+  text-align: center;
 }
 
 .clearfix:before,
