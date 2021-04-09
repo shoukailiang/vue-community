@@ -240,6 +240,7 @@ export default {
             this.deleteImg();
             // 回显上传后的图片
             this.formData.imageUrl = response.data;
+            this.$message.success("上传成功")
           }
         })
         .catch(() => {
@@ -274,6 +275,7 @@ export default {
         if (response.code === 20000) {
           // 上传成功，回显，
           this.$refs.md.$img2Url(pos, response.data);
+          this.$message.success("上传成功")
         }
       });
     },

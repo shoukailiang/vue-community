@@ -164,7 +164,7 @@ export default {
     return {
       // 是否点赞
       isThumb:
-        this.$cookies.get(`question-thumb-${this.$route.params.id}`) || false,
+        this.$cookies.get(`question-thumb-${this.$route.params.id}-${this.$store.state.userInfo.uid}`) || false,
       //    当前登录用户id
       userId: this.$store.state.userInfo && this.$store.state.userInfo.uid,
       //    当前登录用户头像url
@@ -195,7 +195,7 @@ export default {
         this.data.thumhup = this.data.thumhup + count;
         // 保存cookie，永久保存
         this.$cookies.set(
-          `question-thumb-${this.$route.params.id}`,
+          `question-thumb-${this.$route.params.id}-${this.$store.state.userInfo.uid}`,
           this.isThumb,
           {
             maxAge: 60 * 60 * 24 * 365 * 5, // 保存5年
@@ -260,6 +260,7 @@ export default {
         if (response.code === 20000) {
           // 上传成功，回显，
           this.$refs.md.$img2Url(pos, response.data);
+          this.$message.success("上传成功")
         }
       });
     },
