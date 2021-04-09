@@ -197,6 +197,7 @@ export default {
             this.userInfo.imageUrl = response.data;
             // 将用户头像url更新到数据库中
             this.$updateUserInfo(this.userInfo);
+            this.$message.success("上传成功")
           }
         })
         .catch(() => {

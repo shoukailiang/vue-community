@@ -260,6 +260,7 @@ export default {
         if (response.code === 20000) {
           // 上传成功，回显，
           this.$refs.md.$img2Url(pos, response.data);
+          this.$message.success("上传成功")
         }
       });
     },
