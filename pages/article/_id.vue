@@ -142,8 +142,8 @@ export default {
   data() {
     return {
       // 是否已点赞
-      isThumb: this.$cookies.get(`article-thumb-${this.$route.params.id}-${this.$store.state.userInfo.uid}`)
-        ? this.$cookies.get(`article-thumb-${this.$route.params.id}-${this.$store.state.userInfo.uid}`)
+      isThumb: this.$cookies.get(`article-thumb-${this.$route.params.id}`)
+        ? this.$cookies.get(`article-thumb-${this.$route.params.id}`)
         : false,
       // 当前登录用户id
       userId: this.$store.state.userInfo && this.$store.state.userInfo.uid,
@@ -209,7 +209,7 @@ export default {
         this.data.thumhup = this.data.thumhup + count;
         // 保存cookie，永久保存
         this.$cookies.set(
-          `article-thumb-${this.$route.params.id}-${this.$store.state.userInfo.uid}`,
+          `article-thumb-${this.$route.params.id}`,
           this.isThumb,
           {
             maxAge: 60 * 60 * 24 * 365 * 5, // 保存5年
