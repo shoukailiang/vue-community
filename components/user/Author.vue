@@ -60,7 +60,7 @@ export default {
       focusData.userId = this.$store.state.userInfo
         ? this.$store.state.userInfo.uid
         : "";
-        console.log(this.user)
+        // console.log(this.user)
       focusData.focusId = this.user ? this.user.userId : "";
       const { code } = await this.$focusUser(focusData);
       if (code === 20000) {

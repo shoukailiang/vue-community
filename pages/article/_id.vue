@@ -112,11 +112,13 @@
           <!-- parentClass 指定文章内容的父元素class值 -->
           <my-directory parentClass="article-content"></my-directory>
         </my-affix>
-        <my-affix :offset="480" style="padding-top:20px">
+        <my-affix :offset="480" style="padding-top: 20px">
           <!--作者-->
           <Author
             :user="data"
-            v-if="$store.state.userInfo&&$store.state.userInfo.uid!==data.userId"
+            v-if="
+              $store.state.userInfo && $store.state.userInfo.uid !== data.userId
+            "
           />
         </my-affix>
       </el-col>
@@ -135,10 +137,10 @@ import MyDirectory from "@/components/common/Directory";
 // 评论组件
 import MyComment from "@/components/common/Comment";
 
-import Author from '@/components/user/Author'
+import Author from "@/components/user/Author";
 
 export default {
-  components: { MyAffix, MyDirectory, MyComment,Author },
+  components: { MyAffix, MyDirectory, MyComment, Author },
   data() {
     return {
       // 是否已点赞
@@ -150,9 +152,7 @@ export default {
       // 当前登录用户头像，
       userImage:
         this.$store.state.userInfo && this.$store.state.userInfo.imageUrl,
-      topicUser: {
-        
-      },
+      topicUser: {},
     };
   },
 
@@ -209,7 +209,7 @@ export default {
         this.data.thumhup = this.data.thumhup + count;
         // 保存cookie，永久保存
         this.$cookies.set(
-          `article-thumb-${this.$route.params.id}`,
+          `article-thumb-${this.$route.params.id}-${this.$store.state.userInfo.uid}`,
           this.isThumb,
           {
             maxAge: 60 * 60 * 24 * 365 * 5, // 保存5年
@@ -240,6 +240,8 @@ export default {
         if (response.code === 20000) {
           // 刷新评论信息
           this.refreshComment();
+        } else {
+          this.$message.error("未知错误");
         }
       });
     },
@@ -250,6 +252,8 @@ export default {
       if (code === 20000) {
         // 删除成功，刷新评论
         this.refreshComment();
+      } else {
+        this.$message.error("未知错误");
       }
     },
 
@@ -266,7 +270,7 @@ export default {
 </script>
 <style scoped>
 @import "@/assets/css/article/article.css";
-.zan{
+.zan {
   margin-top: 20px;
 }
 </style>

@@ -195,7 +195,7 @@ export default {
         this.data.thumhup = this.data.thumhup + count;
         // 保存cookie，永久保存
         this.$cookies.set(
-          `question-thumb-${this.$route.params.id}`,
+          `question-thumb-${this.$route.params.id}-${this.$store.state.userInfo.uid}`,
           this.isThumb,
           {
             maxAge: 60 * 60 * 24 * 365 * 5, // 保存5年

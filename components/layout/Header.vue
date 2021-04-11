@@ -40,7 +40,7 @@
           <el-button icon="el-icon-search" @click="handleSearch"></el-button>
         </el-col>
 
-        <el-col :md="1" class="message-icon-container">
+        <el-col :md="1" class="message-icon-container hidden-sm-and-down" >
           <el-badge :value="20" :max="99" class="item">
             <i class="el-icon-message message-icon" ></i>
           </el-badge>

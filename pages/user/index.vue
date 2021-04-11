@@ -188,6 +188,11 @@ export default {
       // 封装上传头像表单数据
       const data = new FormData();
       data.append("file", file.file);
+      var updated_data={
+        userInfo:null,
+        accessToken:this.$store.state.accessToken,
+        refreshToken:this.$store.state.refreshToken
+      }
       this.$uploadImg(data)
         .then((response) => {
           if (response.code === 20000) {
@@ -197,6 +202,8 @@ export default {
             this.userInfo.imageUrl = response.data;
             // 将用户头像url更新到数据库中
             this.$updateUserInfo(this.userInfo);
+            updated_data.userInfo = this.userInfo
+            this.$store.commit('UPDATE_ALL_STATE', updated_data)
             this.$message.success("上传成功")
           }
         })
@@ -259,7 +266,7 @@ export default {
     // 2. 查询公开文章列表
     const query = {
       current: 1,
-      size: 20,
+      size: 8,
       total: 0,
       isPublic: 1, // 1.公开，0.未公开
       userId,
