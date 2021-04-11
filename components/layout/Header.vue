@@ -98,7 +98,7 @@ export default {
       searchReq: {
         title: "",
         current: 1,
-        size: 20,
+        size: 8,
       },
       avatar:""
     };

@@ -144,8 +144,12 @@ export default {
   data() {
     return {
       // 是否已点赞
-      isThumb: this.$cookies.get(`article-thumb-${this.$route.params.id}`)
-        ? this.$cookies.get(`article-thumb-${this.$route.params.id}`)
+      isThumb: this.$store.state.userInfo
+        ? this.$cookies.get(
+            `article-thumb-${this.$route.params.id}-${this.$store.state.userInfo.uid}`
+          )
+          ? this.$cookies.get(`article-thumb-${this.$route.params.id}-${this.$store.state.userInfo.uid}`)
+          : false
         : false,
       // 当前登录用户id
       userId: this.$store.state.userInfo && this.$store.state.userInfo.uid,
