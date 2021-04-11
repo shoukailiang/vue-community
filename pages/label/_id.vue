@@ -92,7 +92,7 @@ export default {
     const page = {
       // 分页对象
       current: 1,
-      size: 20,
+      size: 8,
       total: 0,
     };
     // 查询

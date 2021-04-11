@@ -39,7 +39,7 @@
           <el-button icon="el-icon-search" @click="handleSearch"></el-button>
         </el-col>
 
-        <el-col :md="1" class="message-icon-container">
+        <el-col :md="1" class="message-icon-container hidden-sm-and-down">
           <el-badge :value="20" :max="99" class="item">
             <i class="el-icon-message message-icon" ></i>
           </el-badge>
@@ -67,7 +67,7 @@
           <el-dropdown v-if="userInfo" @command="handleCommand">
             <div class="el-dropdown-link">
               <el-avatar
-                :src="userInfo ? userInfo.imageUrl : null"
+                :src="this.avatar ? this.avatar : null"
                 icon="el-icon-user-solid"
               >
               </el-avatar>
@@ -97,9 +97,16 @@ export default {
       searchReq: {
         title: "",
         current: 1,
-        size: 20,
+        size: 8,
       },
+      avatar:""
     };
+  },
+  async created () {
+    if(this.$store.state.userInfo){
+      const { data: userInfo1 } = await this.$getUserInfo(this.$store.state.userInfo.uid);
+      this.avatar = userInfo1.imageUrl
+    }
   },
   computed: {
     userInfo() {

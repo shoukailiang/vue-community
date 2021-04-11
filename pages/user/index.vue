@@ -259,7 +259,7 @@ export default {
     // 2. 查询公开文章列表
     const query = {
       current: 1,
-      size: 20,
+      size: 8,
       total: 0,
       isPublic: 1, // 1.公开，0.未公开
       userId,

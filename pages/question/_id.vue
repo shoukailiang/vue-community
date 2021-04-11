@@ -147,7 +147,7 @@ import MyDirectory from "@/components/common/Directory/index.vue";
 // 评论组件
 import MyComment from "@/components/common/Comment";
 export default {
-  components: {MyAffix, MyDirectory, MyComment },
+  components: { MyAffix, MyDirectory, MyComment },
 
   // 校验id为数值才可访问此组件
   validate({ params }) {
@@ -163,8 +163,11 @@ export default {
   data() {
     return {
       // 是否点赞
-      isThumb:
-        this.$cookies.get(`question-thumb-${this.$route.params.id}`) || false,
+      isThumb: this.$store.state.userInfo.uid
+        ? this.$cookies.get(
+            `question-thumb-${this.$route.params.id}-${this.$store.state.userInfo.uid}`
+          ) || false
+        : false,
       //    当前登录用户id
       userId: this.$store.state.userInfo && this.$store.state.userInfo.uid,
       //    当前登录用户头像url
@@ -195,7 +198,7 @@ export default {
         this.data.thumhup = this.data.thumhup + count;
         // 保存cookie，永久保存
         this.$cookies.set(
-          `question-thumb-${this.$route.params.id}`,
+          `question-thumb-${this.$route.params.id}-${this.$store.state.userInfo.uid}`,
           this.isThumb,
           {
             maxAge: 60 * 60 * 24 * 365 * 5, // 保存5年
@@ -214,7 +217,8 @@ export default {
         questionId: this.$route.params.id,
         userId: this.userId,
         userImage: this.userImage,
-        nickName:this.$store.state.userInfo && this.$store.state.userInfo.nickName,
+        nickName:
+          this.$store.state.userInfo && this.$store.state.userInfo.nickName,
       };
       this.$addReplay(data).then((response) => {
         // 新增评论成功
@@ -241,7 +245,7 @@ export default {
         this.$route.params.id
       );
       this.commentList = data;
-      this.mdContent = '';
+      this.mdContent = "";
     },
 
     // 获取问答输入框的内容
@@ -260,7 +264,7 @@ export default {
         if (response.code === 20000) {
           // 上传成功，回显，
           this.$refs.md.$img2Url(pos, response.data);
-          this.$message.success("上传成功")
+          this.$message.success("上传成功");
         }
       });
     },
@@ -293,7 +297,7 @@ export default {
     if (!isView) {
       // 没有值 ，可以更新浏览数
       const { code } = await app.$updateQuestionViewCount(params.id);
-      console.log(code)
+      console.log(code);
       if (code === 20000) {
         // 将此问题浏览数+1
         data.viewCount++;
@@ -310,7 +314,7 @@ export default {
 
 <style scoped>
 @import "@/assets/css/article/article.css";
-.zan{
+.zan {
   margin-top: 20px;
 }
 </style>
