@@ -20,7 +20,7 @@ const mutations = {
         state.userInfo = data.userInfo
         state.accessToken = data.accessToken
         state.refreshToken = data.refreshToken
-    }
+    },
 }
 
 
@@ -51,7 +51,7 @@ const actions = {
         commit('RESET_USER_STATE')
         // 2. 跳转认证客户端实现退出
         window.location.href = `${process.env.authURL}/logout?redirectURL=${window.location.href}`
-    }
+    },
 }
 
 // 不要忘记

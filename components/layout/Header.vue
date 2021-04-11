@@ -68,7 +68,7 @@
           <el-dropdown v-if="userInfo" @command="handleCommand">
             <div class="el-dropdown-link">
               <el-avatar
-                :src="userInfo ? userInfo.imageUrl : null"
+                :src="this.avatar ? this.avatar : null"
                 icon="el-icon-user-solid"
               >
               </el-avatar>
@@ -100,7 +100,15 @@ export default {
         current: 1,
         size: 20,
       },
+      avatar:""
     };
+  },
+  // 头像bug TODO
+  async created () {
+    if(this.$store.state.userInfo){
+      const { data: userInfo1 } = await this.$getUserInfo(this.$store.state.userInfo.uid);
+      this.avatar = userInfo1.imageUrl
+    }
   },
   computed: {
     userInfo() {

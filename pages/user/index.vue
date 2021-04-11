@@ -76,14 +76,10 @@
           />
         </el-tab-pane>
         <el-tab-pane label="我的粉丝" name="fans">
-          <user-list
-            :Data="FansData"
-          />
+          <user-list :Data="FansData" />
         </el-tab-pane>
         <el-tab-pane label="我的关注" name="focus">
-          <user-list
-            :Data="FocusData"
-          />
+          <user-list :Data="FocusData" />
         </el-tab-pane>
       </el-tabs>
     </el-row>
@@ -145,14 +141,16 @@ export default {
       this.articleList = data.records;
     },
 
-    async getMyFans(paneName,id){
-      const userId = this.$store.state.userInfo && this.$store.state.userInfo.uid;
+    async getMyFans(paneName, id) {
+      const userId =
+        this.$store.state.userInfo && this.$store.state.userInfo.uid;
       const { data } = await this.$getMyFans(userId);
       this.FansData = data;
     },
 
-    async getMyFocus(paneName,id){
-      const userId = this.$store.state.userInfo && this.$store.state.userInfo.uid;
+    async getMyFocus(paneName, id) {
+      const userId =
+        this.$store.state.userInfo && this.$store.state.userInfo.uid;
       const { data } = await this.$getMyFocus(userId);
       this.FocusData = data;
     },
@@ -188,11 +186,11 @@ export default {
       // 封装上传头像表单数据
       const data = new FormData();
       data.append("file", file.file);
-      var updated_data={
-        userInfo:null,
-        accessToken:this.$store.state.accessToken,
-        refreshToken:this.$store.state.refreshToken
-      }
+      var updated_data = {
+        userInfo: null,
+        accessToken: this.$store.state.accessToken,
+        refreshToken: this.$store.state.refreshToken,
+      };
       this.$uploadImg(data)
         .then((response) => {
           if (response.code === 20000) {
@@ -202,9 +200,17 @@ export default {
             this.userInfo.imageUrl = response.data;
             // 将用户头像url更新到数据库中
             this.$updateUserInfo(this.userInfo);
-            updated_data.userInfo = this.userInfo
-            this.$store.commit('UPDATE_ALL_STATE', updated_data)
-            this.$message.success("上传成功")
+            var new_userInfo = {
+              email:this.userInfo.email,
+              imageUrl:this.userInfo.imageUrl,
+              mobile:this.userInfo.mobile,
+              nickname:this.userInfo.nickname,
+              uid:this.userInfo.uid,
+              username:this.userInfo.username
+            }
+            updated_data.userInfo = new_userInfo
+            this.$store.commit("UPDATE_ALL_STATE",updated_data)
+            this.$message.success("上传成功");
           }
         })
         .catch(() => {
