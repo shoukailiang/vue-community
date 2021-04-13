@@ -47,6 +47,12 @@
             @fetch-data="findUserQuestionList"
           />
         </el-tab-pane>
+        <el-tab-pane label="ta的粉丝" name="fans">
+          <user-list :Data="FansData" />
+        </el-tab-pane>
+        <el-tab-pane label="ta的关注" name="focus">
+          <user-list :Data="FocusData" />
+        </el-tab-pane>
       </el-tabs>
     </el-row>
   </div>
@@ -54,9 +60,10 @@
 <script>
 import ArticleList from "@/components/article/List";
 import QuestionList from "@/components/question/List";
+import UserList from "@/components/user/UserList";
 
 export default {
-  components: { QuestionList, ArticleList },
+  components: { QuestionList, ArticleList, UserList },
   data() {
     return {
       loading: false,
@@ -65,6 +72,8 @@ export default {
       },
       questionList: [], // 提问列表
       userId: "",
+      FocusData: [],
+      FansData: [],
     };
   },
   validate({ params }) {
@@ -101,6 +110,16 @@ export default {
       this.articleList = data.records;
     },
 
+    async getMyFans(paneName, id) {
+      const { data } = await this.$getMyFans(this.userId);
+      this.FansData = data;
+    },
+
+    async getMyFocus(paneName, id) {
+      const { data } = await this.$getMyFocus(this.userId);
+      this.FocusData = data;
+    },
+
     // 切换标签页
     handleClick(tab, event) {
       switch (tab.paneName) {
@@ -114,6 +133,12 @@ export default {
           break;
         case "question":
           this.findUserQuestionList(tab.paneName, 1);
+          break;
+        case "fans":
+          this.getMyFans(tab.paneName, 1);
+          break;
+        case "focus":
+          this.getMyFocus(tab.paneName, 1);
           break;
         case "user":
           // 用户不用查询，在加载此页面时已经查询了
@@ -139,7 +164,14 @@ export default {
     };
     const { data } = await app.$findUserArticle(query);
     query.total = data.total;
-    return { userInfo, query, articleList: data.records,userIdNum,focusIdNum };
+    return {
+      userInfo,
+      query,
+      articleList: data.records,
+      userIdNum,
+      focusIdNum,
+      userId
+    };
   },
 };
 </script>
