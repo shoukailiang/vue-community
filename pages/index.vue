@@ -3,7 +3,7 @@
     <el-row type="flex" justify="space-between">
       <!-- 左侧 -->
       <el-col class="hidden-sm-and-down" :md="3">
-        <el-divider content-position="left">技术频道</el-divider>
+        <el-divider content-position="left">技术分类</el-divider>
         <el-menu :default-active="$route.path" router active-text-color="#fff">
           <el-menu-item index="/">推荐</el-menu-item>
           <el-menu-item

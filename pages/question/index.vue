@@ -1,7 +1,7 @@
 <template>
   <div class="question-container">
     <el-row>
-      <el-tabs value="hot" @tab-click="handleClick" type="card">
+      <el-tabs value="hot" @tab-click="handleClick" type="border-card">
         <el-tab-pane label="热门回答" name="hot">
           <List
             name="hot"

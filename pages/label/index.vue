@@ -24,7 +24,7 @@
                 v-for="label in category.labelList"
                 :key="label.id"
               >
-                <el-tag size="small">{{ label.name }}</el-tag>
+                <el-tag size="medium" class="tag">{{ label.name }}</el-tag>
               </nuxt-link>
             </div>
           </el-card>
@@ -41,7 +41,9 @@
             v-for="label in hotTagList"
             :key="label.id"
           >
-            <el-tag size="small">{{ label.name }}</el-tag>
+            <el-tag class="tag" type="danger" effect="dark">{{
+              label.name
+            }}</el-tag>
           </nuxt-link>
         </div>
       </el-col>
@@ -77,7 +79,10 @@ export default {
 .el-card {
   height: 200px;
 }
-.tag-con{
+.tag-con {
   padding: 20px;
+}
+.tag {
+  margin: 2px;
 }
 </style>
