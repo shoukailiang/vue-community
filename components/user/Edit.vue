@@ -93,7 +93,9 @@ export default {
         callback(new Error("姓名不能为空"));
       } else if (value.length > 30) {
         callback(new Error("最多30个字符"));
-      } else {
+      } else if(!isvalidUsername(value)){
+        callback(new Error("用户名不合法"));
+      }else {
         callback();
       }
     };

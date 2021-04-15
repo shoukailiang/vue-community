@@ -67,7 +67,7 @@
             <!-- 未登录 -->
             <el-card v-if="!$store.state.userInfo">
               <h4>
-                登录后参与交流、获取后续更新提醒 {{ $store.state.userInfo }}
+                登录后参与交流、获取后续更新提醒
               </h4>
               <div>
                 <!-- 不要以 / 开头，LoginPage -->
