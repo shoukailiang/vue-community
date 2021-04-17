@@ -33,22 +33,6 @@
       </el-col>
       <!-- 右侧广告区 -->
       <el-col class="hidden-sm-and-down" :md="5">
-        <el-card
-          class="right-card"
-          shadow="hover"
-          :body-style="{ padding: '10px' }"
-        >
-          <p>经典推荐</p>
-          <el-carousel height="210px">
-            <el-carousel-item v-for="item in courseAdvertList" :key="item.id">
-              <a :href="item.advertUrl" :target="item.advertTarget">
-                <img :src="item.imageUrl" />
-                <span>{{ item.title }}</span>
-              </a>
-            </el-carousel-item>
-          </el-carousel>
-        </el-card>
-
         <el-divider>热门文章</el-divider>
         <el-table
           class="label-list"
@@ -67,6 +51,21 @@
             </template>
           </el-table-column>
         </el-table>
+        <el-card
+          class="right-card"
+          shadow="hover"
+          :body-style="{ padding: '10px' }"
+        >
+          <p>经典推荐</p>
+          <el-carousel height="210px">
+            <el-carousel-item v-for="item in courseAdvertList" :key="item.id">
+              <a :href="item.advertUrl" :target="item.advertTarget">
+                <img :src="item.imageUrl" />
+                <span>{{ item.title }}</span>
+              </a>
+            </el-carousel-item>
+          </el-carousel>
+        </el-card>
       </el-col>
     </el-row>
   </div>
@@ -91,4 +90,11 @@ export default {
 
 <style scoped>
 @import "@/assets/css/article/index.css";
+
+.label-list {
+  margin-bottom: 20px;
+}
+.article-label:hover {
+  background: #f45154;
+}
 </style>

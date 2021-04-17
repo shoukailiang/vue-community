@@ -1,11 +1,11 @@
 <template>
   <!-- 文章列表 -->
   <div id="list-container">
-     <div slot="header" class="clearfix">
-        检索到 <code>{{ articleList.length }}</code>
-        条关于 <code class="has-text-info">{{ query.title }}</code> 的记录
-      </div>
-      <el-divider></el-divider>
+    <div slot="header" class="clearfix">
+      检索到 <code>{{ articleList.length }}</code> 条关于
+      <code class="has-text-info">{{ query.title }}</code> 的记录
+    </div>
+    <el-divider></el-divider>
     <ul class="note-list">
       <!-- 无 主 图 -->
       <li
@@ -63,9 +63,9 @@ export default {
   },
   methods: {
     async getArticleList() {
-      this.query.current = this.$route.query.current
-      this.query.size = this.$route.query.size
-      this.query.title = this.$route.query.title
+      this.query.current = this.$route.query.current;
+      this.query.size = this.$route.query.size;
+      this.query.title = this.$route.query.title;
       const { data } = await this.$searchArticle(this.query);
       this.articleList = data.records;
     },
@@ -75,7 +75,6 @@ export default {
       this.getArticleList();
     },
   },
-
 
   // 校验路由参数合法性
   validate({ params }) {
@@ -103,10 +102,10 @@ export default {
 /* 此处补要用 scoped，因为要被引入 index.vue 中 */
 @import "@/assets/css/article/list.css";
 code {
-    background-color: whitesmoke;
-    color: #da1039;
-    font-size: 0.875em;
-    font-weight: normal;
-    padding: 0.25em 0.5em 0.25em;
+  background-color: whitesmoke;
+  color: #da1039;
+  font-size: 0.875em;
+  font-weight: normal;
+  padding: 0.25em 0.5em 0.25em;
 }
 </style>

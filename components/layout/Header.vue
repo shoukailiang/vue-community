@@ -76,6 +76,7 @@
               <el-dropdown-item command="article">写文章</el-dropdown-item>
               <el-dropdown-item command="question">提问题</el-dropdown-item>
               <el-dropdown-item command="user">我的主页</el-dropdown-item>
+              <el-dropdown-item command="admin">后台管理</el-dropdown-item>
               <el-dropdown-item v-if="userInfo" command="logout"
                 >退出</el-dropdown-item
               >
@@ -152,6 +153,9 @@ export default {
           routeData = this.$router.resolve("/user");
           window.open(routeData.href, "_blank");
           break;
+        case "admin":
+          window.open("http://localhost:9528", "_blank");
+          break;
         case "logout":
           // 触发UserLogout
           this.$store.dispatch("UserLogout");
@@ -184,7 +188,7 @@ export default {
       this.item = item;
     },
     async handleSearch() {
-      if(this.searchReq.title===""){
+      if(this.searchReq.title===""||this.searchReq.title===null){
         this.$message.error("请输入内容");
         return;
       }
