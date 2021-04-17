@@ -94,7 +94,6 @@ export default {
       // 搜索
       articleData: [],
       state1: "",
-      item: "",
       searchReq: {
         title: "",
         current: 1,
@@ -182,10 +181,10 @@ export default {
       };
     },
     loadAll() {
-      return [{ value: "java" }, { value: "spring" }];
+      return [{ value: "java" }, { value: "html" }];
     },
     handleSelect(item) {
-      this.item = item;
+      this.searchReq.title = item.value;
     },
     async handleSearch() {
       if(this.searchReq.title===""||this.searchReq.title===null){
