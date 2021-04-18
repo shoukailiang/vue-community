@@ -29,7 +29,7 @@
         <el-col class="hidden-sm-and-down" :md="6">
           <el-autocomplete
             class="inline-input"
-            v-model="state1"
+            v-model.trim="state1"
             :fetch-suggestions="querySearch"
             placeholder="输入您想搜索的文章"
             @select="handleSelect"
@@ -48,7 +48,6 @@
         <el-col class="nav-right" :xs="10" :sm="10" :md="3">
           <!-- 登录、注册/头像 -->
           <div class="nav-sign">
-            <!-- <el-button type="text">管理后台</el-button> -->
             <el-button
               v-if="!userInfo"
               type="text"
@@ -200,8 +199,8 @@ export default {
         },
       });
     },
-    getSearchText(data) {
-      this.searchReq.title = data;
+    getSearchText() {
+      this.searchReq.title = this.state1;
     },
   },
   mounted() {

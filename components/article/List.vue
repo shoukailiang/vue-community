@@ -14,7 +14,7 @@
       <el-table-column>
         <template slot-scope="scope">
           <h2 class="title">
-            <nuxt-link :to="'/article/' + scope.row.id" target="_blank">
+            <nuxt-link :to="'/article/' + scope.row.id" >
               {{ scope.row.title }}
             </nuxt-link>
           </h2>

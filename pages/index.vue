@@ -19,7 +19,7 @@
       <el-col :md="16">
         <div class="article-center">
           <div class="banner">
-            <el-carousel height="230px">
+            <el-carousel height="230px" direction="vertical" >
               <el-carousel-item v-for="item in mainAdvertList" :key="item.id">
                 <a :href="item.advertUrl" :target="item.advertTarget">
                   <img :src="item.imageUrl" />

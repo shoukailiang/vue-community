@@ -14,7 +14,7 @@
         :key="item.id"
       >
         <div class="content">
-          <nuxt-link :to="`/article/${item.id}`" target="_blank">
+          <nuxt-link :to="`/article/${item.id}`" >
             <p class="title">{{ item.title }}</p>
             <p class="abstract">
               {{ item.summary }}

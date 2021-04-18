@@ -9,7 +9,7 @@
         :key="item.id"
       >
         <div class="content">
-          <nuxt-link :to="`/article/${item.id}`" target="_blank">
+          <nuxt-link :to="`/article/${item.id}`" >
             <p class="title">{{ item.title }}</p>
             <p class="abstract">
               {{ item.summary }}
@@ -41,16 +41,17 @@
     </ul>
     <!-- 分 页 -->
     <el-row class="page" type="flex" justify="center">
-      <el-tag v-if="noMore || articleList.length === 0" type="primary">
+      <el-button v-if="noMore || articleList.length === 0" type="primary" disabled class="loadmore-button">
         没有更多了……
-      </el-tag>
+      </el-button>
       <el-button
         v-else
         @click="load"
         :loading="loading"
         type="primary"
-        size="small"
+        size="medium"
         round
+        class="loadmore-button"
       >
         {{ loading ? "加载中……" : "点击加载更多" }}
       </el-button>
@@ -109,4 +110,7 @@ export default {
 <style>
 /* 此处补要用 scoped，因为要被引入 index.vue 中 */
 @import "@/assets/css/article/list.css";
+.loadmore-button{
+  margin-bottom: 40px;
+}
 </style>
