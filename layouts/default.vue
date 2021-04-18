@@ -6,7 +6,7 @@
     <div class="main">
       <nuxt />
     </div>
-    <my-footer></my-footer>
+    <!-- <my-footer></my-footer> -->
     <!-- 底部 -->
     <!-- 回到顶部 -->
     <el-backtop :bottom="80"></el-backtop>

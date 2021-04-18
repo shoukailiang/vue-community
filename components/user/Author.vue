@@ -24,7 +24,6 @@
 export default {
   async created() {
     var focusData = {
-      name: 111,
     };
     focusData.userId = this.$store.state.userInfo
       ? this.$store.state.userInfo.uid

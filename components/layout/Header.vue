@@ -30,7 +30,7 @@
         <el-col class="hidden-sm-and-down" :md="6">
           <el-autocomplete
             class="inline-input"
-            v-model="state1"
+            v-model.trim="state1"
             :fetch-suggestions="querySearch"
             placeholder="输入您想搜索的文章"
             @select="handleSelect"
@@ -94,7 +94,6 @@ export default {
       // 搜索
       articleData: [],
       state1: "",
-      item: "",
       searchReq: {
         title: "",
         current: 1,
@@ -183,7 +182,7 @@ export default {
       return [{ value: "java" }, { value: "spring" }];
     },
     handleSelect(item) {
-      this.item = item;
+      this.searchReq.title = item.value;
     },
     async handleSearch() {
       if(this.searchReq.title===""){
@@ -199,8 +198,8 @@ export default {
         },
       });
     },
-    getSearchText(data) {
-      this.searchReq.title = data;
+    getSearchText() {
+      this.searchReq.title = this.state1;
     },
   },
   mounted() {
