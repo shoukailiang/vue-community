@@ -50,15 +50,12 @@ export default {
   },
   methods: {
     async handleFocus() {
-      var focusData = {
-        name: 111,
-      };
+      var focusData = {};
       // 取消关注或者关注
       this.isFocus = !this.isFocus;
       focusData.userId = this.$store.state.userInfo
         ? this.$store.state.userInfo.uid
         : "";
-        console.log(this.user)
       focusData.focusId = this.user ? this.user.userId : "";
       const { code } = await this.$focusUser(focusData);
       if (code === 20000) {

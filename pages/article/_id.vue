@@ -130,11 +130,8 @@
 import "@/assets/css/md/github-markdown.css";
 import "@/assets/css/md/github-min.css";
 import { dateFormat } from "@/utils/date";
-// 固 钉
 import MyAffix from "@/components/common/Affix";
-// 生成文章导航目录
 import MyDirectory from "@/components/common/Directory";
-// 评论组件
 import MyComment from "@/components/common/Comment";
 
 import Author from "@/components/user/Author";
@@ -162,7 +159,6 @@ export default {
     };
   },
 
-  // 校验路由参数 http://localhost:3000/article/12
   validate({ params }) {
     // 必须是number类型
     return /^\d+$/.test(params.id);
@@ -172,7 +168,6 @@ export default {
       title: this.data.title, // 浏览器显示的标题
     };
   },
-  // 获取数据
   async asyncData({ params, app }) {
     // 查询文章详情
     const { data } = await app.$getArticleById(params.id);

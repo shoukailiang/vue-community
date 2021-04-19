@@ -48,6 +48,7 @@
             </div>
             <!-- plain为true，背景不是深蓝色，为false是深蓝色 -->
             <el-button
+              :disabled="!$store.state.userInfo"
               @click="handleThumb"
               icon="el-icon-thumb"
               type="primary"
@@ -138,13 +139,8 @@ import "@/assets/css/md/github-markdown.css";
 import "@/assets/css/md/github-min.css";
 
 import { dateFormat } from "@/utils/date.js";
-
-// 固钉
 import MyAffix from "@/components/common/Affix/index.vue";
-// 文章目录
 import MyDirectory from "@/components/common/Directory/index.vue";
-
-// 评论组件
 import MyComment from "@/components/common/Comment";
 export default {
   components: { MyAffix, MyDirectory, MyComment },
