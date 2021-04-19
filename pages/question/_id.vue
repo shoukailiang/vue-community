@@ -163,7 +163,7 @@ export default {
   data() {
     return {
       // 是否点赞
-      isThumb: this.$store.state.userInfo.uid
+      isThumb: this.$store.state.userInfo
         ? this.$cookies.get(
             `question-thumb-${this.$route.params.id}-${this.$store.state.userInfo.uid}`
           ) || false
