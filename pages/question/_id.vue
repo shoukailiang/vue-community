@@ -46,7 +46,6 @@
             <div class="article-content">
               <div class="markdown-body" v-html="data.htmlContent"></div>
             </div>
-            <!-- plain为true，背景不是深蓝色，为false是深蓝色 -->
             <el-button
               :disabled="!$store.state.userInfo"
               @click="handleThumb"
@@ -100,18 +99,19 @@
             </el-card>
             <!-- markdown编辑器，提交回答内容 -->
             <div v-else>
-              <!-- 
-                                ref 就是唯一标识，相关于id
-                                v-model 绑定的markdown输入 框的内容
-                            -->
-              <mavon-editor
-                :autofocus="false"
-                ref="md"
-                v-model="mdContent"
-                @change="getMdHtml"
-                @imgAdd="uploadContentImg"
-                @imgDel="delConentImg"
-              />
+              <!-- ref 就是唯一标识，相关于id
+                  v-model 绑定的markdown输入 框的内容
+              -->
+              <client-only>
+                <mavon-editor
+                  :autofocus="false"
+                  ref="md"
+                  v-model="mdContent"
+                  @change="getMdHtml"
+                  @imgAdd="uploadContentImg"
+                  @imgDel="delConentImg"
+                />
+              </client-only>
               <el-row style="margin-top: 20px" type="flex" justify="center">
                 <el-button type="primary" @click="submitReplay">
                   提交问答
@@ -145,7 +145,6 @@ import MyComment from "@/components/common/Comment";
 export default {
   components: { MyAffix, MyDirectory, MyComment },
 
-  // 校验id为数值才可访问此组件
   validate({ params }) {
     return /^\d+$/.test(params.id);
   },
