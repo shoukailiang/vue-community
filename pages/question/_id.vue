@@ -99,9 +99,6 @@
             </el-card>
             <!-- markdown编辑器，提交回答内容 -->
             <div v-else>
-              <!-- ref 就是唯一标识，相关于id
-                  v-model 绑定的markdown输入 框的内容
-              -->
               <client-only>
                 <mavon-editor
                   :autofocus="false"
@@ -267,7 +264,7 @@ export default {
     // 删除回答内容图片
     delConentImg(urlAndFileArr) {
       const fileUrl = urlAndFileArr[0]; //图片url
-      const file = urlAndFileArr[1]; //File对象
+      //const file = urlAndFileArr[1]; //File对象
       // 删除内容图片
       this.$deleteImg(fileUrl);
     },

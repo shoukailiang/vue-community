@@ -13,10 +13,6 @@ export default ({ store, route, redirect, $axios }) => {
 
     $axios.onResponse(response => {
         // console.log('响应拦截器：', response)
-        // 没有访问令牌，需要通过刷新令牌重新获取访问令牌，应为无法模拟401，用了以下三行假装模拟
-        // if(!store.state.accessToken) {
-        //     sendRefreshRequest(route, store, redirect)
-        // }
         return response
     })
 

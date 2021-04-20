@@ -74,13 +74,12 @@
 <script>
 export default {
   async asyncData({ app }) {
-    // 1. 获取技术频道(类别) data取别名 categoryList
+    // 左侧分类  data取别名 categoryList
     const { data: categoryList } = await app.$getCategoryList();
-    // 2. 获取滚动图广告，位置position=1
+    // 上方，位置position=1
     const { data: mainAdvertList } = await app.$getAdvertList(1);
-    // 3. 获取经典推荐，位置position=2
+    // 右侧，位置position=2
     const { data: courseAdvertList } = await app.$getAdvertList(2);
-    // console.log("courseAdvertList", courseAdvertList);
     // 简 写 { categoryList: categoryList }
     const { data: hotArticleList } = await app.$hotArticleList();
     return { categoryList, mainAdvertList, courseAdvertList, hotArticleList };

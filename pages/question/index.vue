@@ -40,7 +40,6 @@ export default {
   },
   // 默认查询热门问答
   async asyncData({ app }) {
-    // 分页对象
     const page = {
       total: 0, // 总记录数
       current: 1, // 当前页码
@@ -61,7 +60,6 @@ export default {
       this.fetchData(tab.paneName,1);
     },
     // 获取数据，子组件List会传递参数(标签名，当前页码)
-    // 获取数据(标签名，当前页码)
     async fetchData(paneName, current) {
       // 分页对象
       this.page.current = current;
@@ -81,11 +79,8 @@ export default {
           response = await this.$getWaitList(this.page);
           break;
       }
-      // 响应成功
       if (response && response.code === 20000) {
-        // 总记录数
         this.page.total = response.data.total;
-        // 列表数据
         this.listData = response.data.records;
       }
     },

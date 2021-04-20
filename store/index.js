@@ -54,7 +54,6 @@ const actions = {
     }
 }
 
-// 不要忘记
 export default {
     state,
     mutations,

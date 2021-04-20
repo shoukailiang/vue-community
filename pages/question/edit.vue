@@ -37,18 +37,16 @@
       </el-form-item>
 
       <el-form-item label="内容：" prop="content">
-        <!-- 
-                    ref 就是唯一标识，相关于id
-                    v-model 绑定的markdown输入 框的内容
-                 -->
-        <mavon-editor
-          :autofocus="false"
-          ref="md"
-          v-model="formData.mdContent"
-          @change="getMdHtml"
-          @imgAdd="uploadContentImg"
-          @imgDel="delConentImg"
-        />
+        <client-only>
+          <mavon-editor
+            :autofocus="false"
+            ref="md"
+            v-model="formData.mdContent"
+            @change="getMdHtml"
+            @imgAdd="uploadContentImg"
+            @imgDel="delConentImg"
+          />
+        </client-only>
       </el-form-item>
     </el-form>
     <el-row type="flex" justify="center">

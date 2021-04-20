@@ -34,7 +34,6 @@
                   &nbsp;&nbsp; 编 辑
                 </nuxt-link>
               </div>
-              <!-- 加 style="margin: 5px;" 不然会紧密连接在一起 -->
               <el-tag
                 style="margin: 5px"
                 v-for="item in data.labelList"
@@ -49,7 +48,6 @@
               <!-- 1. 加上样式，2 使用 v-html 渲染 -->
               <div class="markdown-body" v-html="data.htmlContent"></div>
             </div>
-            <!-- plain为true为深色，false不是深色 -->
             <el-button
               :disabled="!$store.state.userInfo"
               @click="handleThumb"
@@ -70,7 +68,6 @@
                 登录后参与交流、获取后续更新提醒
               </h4>
               <div>
-                <!-- 不要以 / 开头，LoginPage -->
                 <el-button
                   @click="$store.dispatch('LoginPage')"
                   type="primary"
@@ -155,7 +152,6 @@ export default {
       // 当前登录用户头像，
       userImage:
         this.$store.state.userInfo && this.$store.state.userInfo.imageUrl,
-      topicUser: {},
     };
   },
 

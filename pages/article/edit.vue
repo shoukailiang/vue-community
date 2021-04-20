@@ -80,13 +80,15 @@
                     v-model 绑定的markdown输入 框的内容
                     @change   获得md的html的内容
         -->
-        <mavon-editor
-          ref="md"
-          v-model="formData.mdContent"
-          @change="getMdHtml"
-          @imgAdd="uploadContentImg"
-          @imgDel="delConentImg"
-        />
+        <client-only>
+          <mavon-editor
+            ref="md"
+            v-model="formData.mdContent"
+            @change="getMdHtml"
+            @imgAdd="uploadContentImg"
+            @imgDel="delConentImg"
+          />
+        </client-only>
       </el-form-item>
     </el-form>
     <el-row type="flex" justify="center">
@@ -266,8 +268,8 @@ export default {
 
     // 上传内容图片（图片位置编号，File对象）
     uploadContentImg(pos, file) {
+      // console.log(pos)
       // console.log('上传内容图片：', file)
-      // 封装表单数据
       const fd = new FormData();
       fd.append("file", file);
 
@@ -282,7 +284,7 @@ export default {
 
     delConentImg(urlAndFileArr) {
       const fileUrl = urlAndFileArr[0]; //图片url
-      const file = urlAndFileArr[1]; //File对象
+      // const file = urlAndFileArr[1]; //File对象
       // console.log('删除内容图片', fileUrl, file)
       // 删除内容图片
       this.$deleteImg(fileUrl);

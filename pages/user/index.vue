@@ -119,16 +119,13 @@ export default {
   methods: {
     // 查询我的提问列表（
     async findUserQuestionList(paneName, current) {
-      // 当前查询页码
       this.query.current = current;
       // 将isPlulic 删除
       delete this.query.isPublic;
 
       const { data } = await this.$findUserQuestion(this.query);
 
-      // 总记录数
       this.query.total = data.total;
-      // 提问列表数据
       this.questionList = data.records;
     },
 
@@ -139,9 +136,7 @@ export default {
       this.query.isPublic = paneName === "public" ? 1 : 0;
       // 发送分页查询请求
       const { data } = await this.$findUserArticle(this.query);
-      // 总记录数
       this.query.total = data.total;
-      // 列表数据
       this.articleList = data.records;
     },
 
@@ -205,7 +200,7 @@ export default {
         });
     },
 
-    // 删除头像, 上传成功后删除原来的头像
+    // 删除头像
     deleteImg() {
       if (this.userInfo.imageUrl) {
         // 如果有原图地址，则删除它，
@@ -250,13 +245,12 @@ export default {
   },
 
   async asyncData({ app, store }) {
-    // 1. 查询用户信息
     const userId = store.state.userInfo && store.state.userInfo.uid;
     const { data: userInfo } = await app.$getUserInfo(userId);
     const { data: userIdNum } = await app.$getUserId(userId);
     const { data: focusIdNum } = await app.$getFocusId(userId);
 
-    // 2. 查询公开文章列表
+    // 文章列表
     const query = {
       current: 1,
       size: 8,

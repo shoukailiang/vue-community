@@ -89,13 +89,10 @@ export default {
   },
 
   methods: {
-    // 当页码改变后,被触发 , current 是最新的当前页码
     handleCurrentChange(current) {
       // 触发父组件事件查询数据(父组件事件名，标签页名称, 当前页码)
       this.$emit("fetch-data", this.name, current);
     },
-
-    // 格式化日期
     getDateFormat(date) {
       return dateFormat(date);
     },

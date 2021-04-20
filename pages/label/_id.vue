@@ -90,7 +90,6 @@ export default {
   async asyncData({ params, app }) {
     // 首次加载页面，查询技术问答列表
     const page = {
-      // 分页对象
       current: 1,
       size: 8,
       total: 0,

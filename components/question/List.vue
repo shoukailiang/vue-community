@@ -103,7 +103,6 @@ export default {
       this.$emit("fetch-data", this.name, current);
     },
 
-    // 格式化日期
     getDateFormat(date) {
       return dateFormat(date);
     },

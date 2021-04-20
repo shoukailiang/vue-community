@@ -69,29 +69,23 @@ export default {
   },
   methods: {
     async load() {
-      // 加载中
       this.loading = true;
-      //	将 页 码 加 1 
       this.query.current++
       const { data } = await this.$getArticleList(this.query);
       // 有数据
       if (data.records && data.records.length > 0) {
-        // 合并新旧数据返回
+        // 合并
         this.articleList = this.articleList.concat(data.records);
       } else {
-        // 没有数据了
         this.noMore = true;
       }
-      // 加载完
       this.loading = false;
     },
   },
 
-  // 校验路由参数合法性
   validate({ params }) {
     const id = params.id ? params.id : 0; // 在首页推荐的时候，是没有id传入的，即0值查询推荐的
     // 必须是数值
-    // 必须是number类型
     return /^\d+$/.test(id);
   },
 
