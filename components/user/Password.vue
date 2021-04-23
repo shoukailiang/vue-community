@@ -49,7 +49,6 @@
 </template>
 <script>
 export default {
-  // 接收父组件传递的属性
   props: {
     loading: {
       // 是否点击确定按钮

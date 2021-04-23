@@ -156,7 +156,6 @@ export default {
       });
     },
 
-    // 提交数据给后台
     async submitData() {
       let resp = null;
       // console.log('this.formData', this.formData)

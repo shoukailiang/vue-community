@@ -188,7 +188,6 @@ export default {
       if (code === 20000) {
         // 更新下当前问题页面显示的点赞数
         this.data.thumhup = this.data.thumhup + count;
-        // 保存cookie，永久保存
         this.$cookies.set(
           `question-thumb-${this.$route.params.id}-${this.$store.state.userInfo.uid}`,
           this.isThumb,

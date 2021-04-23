@@ -3,7 +3,6 @@
   <!-- nofollow 告诉搜索引擎"不要追踪此网页上的链接或不要追踪此特定链接 -->
   <div class="footer">
     <div class="warp">
-      <!-- <div class="top-line"></div> -->
       <el-divider>IT ALLEY— 开始分享你的知识。</el-divider>
       <div class="footer-link">
         <a rel="nofollow" target="_blank" href="/about/">关于我们</a

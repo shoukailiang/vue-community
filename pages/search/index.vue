@@ -76,7 +76,6 @@ export default {
     },
   },
 
-  // 校验路由参数合法性
   validate({ params }) {
     const id = params.id ? params.id : 0; // 在首页推荐的时候，是没有id传入的，即0值查询推荐的
     // 必须是数值

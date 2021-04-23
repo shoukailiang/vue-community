@@ -2,9 +2,7 @@
   <div class="header header-fixed">
     <div class="nav">
       <el-row type="flex" justify="space-between">
-        <!-- Logo， 任意宽度都是占4格-->
         <el-col class="logo" :xs="4" :sm="4" :md="4">
-          <!-- Logo -->
           <nuxt-link to="/"
             ><img src="~/assets/images/logo.png" height="40px"
           /></nuxt-link>
@@ -46,7 +44,6 @@
         </el-col>
         <!-- 登录、注册/头像 手机与平板坚屏都占18格，其他占8格式-->
         <el-col class="nav-right" :xs="10" :sm="10" :md="3">
-          <!-- 登录、注册/头像 -->
           <div class="nav-sign">
             <el-button
               v-if="!userInfo"
@@ -66,7 +63,7 @@
           <el-dropdown v-if="userInfo" @command="handleCommand">
             <div class="el-dropdown-link">
               <el-avatar
-                :src="this.avatar ? this.avatar : null"
+                :src="userInfo ? userInfo.imageUrl : null"
                 icon="el-icon-user-solid"
               >
               </el-avatar>
@@ -98,14 +95,7 @@ export default {
         current: 1,
         size: 8,
       },
-      avatar:""
     };
-  },
-  async created () {
-    if(this.$store.state.userInfo){
-      const { data: userInfo1 } = await this.$getUserInfo(this.$store.state.userInfo.uid);
-      this.avatar = userInfo1.imageUrl
-    }
   },
   computed: {
     userInfo() {

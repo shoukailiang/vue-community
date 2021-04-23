@@ -183,6 +183,11 @@ export default {
       // 封装上传头像表单数据
       const data = new FormData();
       data.append("file", file.file);
+      var updated_data={
+        userInfo:null,
+        accessToken:this.$store.state.accessToken||null,
+        refreshToken:this.$store.state.refreshToken||null
+      }
       this.$uploadImg(data)
         .then((response) => {
           if (response.code === 20000) {
@@ -190,6 +195,24 @@ export default {
             this.deleteImg();
             // 回显上传后的图片
             this.userInfo.imageUrl = response.data;
+
+            const {email,imageUrl,mobile,nickName,id,username} = this.userInfo;
+            // console.log(this.userInfo)
+            var new_info={
+              email,
+              imageUrl,
+              mobile,
+              nickName,
+              uid:id,
+              username
+            };
+            updated_data['userInfo'] = new_info
+
+            this.$cookies.set(`userInfo`,updated_data.userInfo,{maxAge: 60 * 60 * 24 * 30, }
+        );
+            
+            this.$store.commit("UPDATE_ALL_STATE",updated_data)
+
             // 将用户头像url更新到数据库中
             this.$updateUserInfo(this.userInfo);
             this.$message.success("上传成功")
