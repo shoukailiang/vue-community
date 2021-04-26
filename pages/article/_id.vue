@@ -147,9 +147,7 @@ export default {
             )
           : false
         : false,
-      // 当前登录用户id
       userId: this.$store.state.userInfo && this.$store.state.userInfo.uid,
-      // 当前登录用户头像，
       userImage:
         this.$store.state.userInfo && this.$store.state.userInfo.imageUrl,
     };
@@ -165,20 +163,16 @@ export default {
     };
   },
   async asyncData({ params, app }) {
-    // 查询文章详情
     const { data } = await app.$getArticleById(params.id);
 
-    // 更新浏览数，判断 Cookie 中是否已经存在，防止无限刷自己浏览数
     // 浏览器页面关闭后，删除cookie
     const isView = app.$cookies.get(`article-view-${data.id}`);
     // 没有值，则更新浏览数
     if (!isView) {
       const { code } = await app.$updateArticleViewCount(data.id);
       if (code === 20000) {
-        // 更新后页面上+1浏览数，省得再查询
         data.viewCount++;
       }
-      // 保存到cookie中，关闭浏览器后删除
       app.$cookies.set(`article-view-${data.id}`, true);
     }
 
@@ -192,19 +186,14 @@ export default {
     getDateFormat(date) {
       return dateFormat(date);
     },
-    // 点赞
     async handleThumb() {
-      // 取消点赞或者点赞
       this.isThumb = !this.isThumb;
       // 1. 点赞，-1取消赞
       const count = this.isThumb ? 1 : -1;
-      // 获取文章
       const articleId = this.$route.params.id;
       const { code } = await this.$updateArticleThumb(articleId, count);
       if (code === 20000) {
-        // 更新下当前文章页面显示的点赞数
         this.data.thumhup = this.data.thumhup + count;
-        // 保存cookie，永久保存
         this.$cookies.set(
           `article-thumb-${this.$route.params.id}-${this.$store.state.userInfo.uid}`,
           this.isThumb,
@@ -235,13 +224,11 @@ export default {
       this.$addComment(data).then((response) => {
         // 新增评论成功
         if (response.code === 20000) {
-          // 刷新评论信息
           this.refreshComment();
         }
       });
     },
 
-    // 删除
     async doRemove(id) {
       const { code } = await this.$deleteCommentById(id);
       if (code === 20000) {

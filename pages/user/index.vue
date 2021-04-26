@@ -97,7 +97,6 @@ import UserPassword from "@/components/user/Password";
 import UserList from "@/components/user/UserList";
 
 export default {
-  // 引用中间件，拦截路由请求，判断是否已经身份认证
   middleware: "auth",
   components: { QuestionList, ArticleList, UserEdit, UserPassword, UserList },
 
@@ -223,7 +222,6 @@ export default {
         });
     },
 
-    // 删除头像
     deleteImg() {
       if (this.userInfo.imageUrl) {
         // 如果有原图地址，则删除它，

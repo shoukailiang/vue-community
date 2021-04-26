@@ -160,9 +160,7 @@ export default {
             `question-thumb-${this.$route.params.id}-${this.$store.state.userInfo.uid}`
           ) || false
         : false,
-      //    当前登录用户id
       userId: this.$store.state.userInfo && this.$store.state.userInfo.uid,
-      //    当前登录用户头像url
       userImage:
         this.$store.state.userInfo && this.$store.state.userInfo.imageUrl,
       //    commentList: []
@@ -176,17 +174,13 @@ export default {
       return dateFormat(date);
     },
 
-    //点赞
     async handleThumb() {
-      // 取消点赞或者点赞
       this.isThumb = !this.isThumb;
       // 1. 点赞，-1取消赞
       const count = this.isThumb ? 1 : -1;
-      // 获取问题id
       const questionId = this.$route.params.id;
       const { code } = await this.$updateQuestionThumb(questionId, count);
       if (code === 20000) {
-        // 更新下当前问题页面显示的点赞数
         this.data.thumhup = this.data.thumhup + count;
         this.$cookies.set(
           `question-thumb-${this.$route.params.id}-${this.$store.state.userInfo.uid}`,
@@ -280,10 +274,8 @@ export default {
   },
 
   async asyncData({ params, app }) {
-    // 1. 查询问题详情
     const { data } = await app.$getQuestionById(params.id);
 
-    // 2. 更新问题浏览数
     const isView = app.$cookies.get(`question-view-${params.id}`);
     if (!isView) {
       // 没有值 ，可以更新浏览数
@@ -291,8 +283,6 @@ export default {
       console.log(code);
       if (code === 20000) {
         // 将此问题浏览数+1
-        data.viewCount++;
-        // 保存cookie中, 关闭浏览器后会被删除
         app.$cookies.set(`question-view-${params.id}`, true);
       }
     }

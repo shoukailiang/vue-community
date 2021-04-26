@@ -61,17 +61,14 @@ export default {
     },
     // 获取数据，子组件List会传递参数(标签名，当前页码)
     async fetchData(paneName, current) {
-      // 分页对象
       this.page.current = current;
       // 请求接口响应对象
       let response = null;
       switch (paneName) {
         case "hot":
-          // 查询热门
           response = await this.$getHotList(this.page);
           break;
         case "new":
-          // 查询最新
           response = await this.$getNewList(this.page);
           break;
         case "wait":

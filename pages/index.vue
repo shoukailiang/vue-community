@@ -1,5 +1,16 @@
 <template>
   <div>
+    <el-row>
+      <div class="banner">
+        <el-carousel height="230px"  type="card">
+          <el-carousel-item v-for="item in mainAdvertList" :key="item.id">
+            <a :href="item.advertUrl" :target="item.advertTarget">
+              <img :src="item.imageUrl" />
+            </a>
+          </el-carousel-item>
+        </el-carousel>
+      </div>
+    </el-row>
     <el-row type="flex" justify="space-between">
       <!-- 左侧 -->
       <el-col class="hidden-sm-and-down" :md="3">
@@ -18,15 +29,6 @@
       <!-- 中间 -->
       <el-col :md="16">
         <div class="article-center">
-          <div class="banner">
-            <el-carousel height="230px" direction="vertical" >
-              <el-carousel-item v-for="item in mainAdvertList" :key="item.id">
-                <a :href="item.advertUrl" :target="item.advertTarget">
-                  <img :src="item.imageUrl" />
-                </a>
-              </el-carousel-item>
-            </el-carousel>
-          </div>
           <!-- 文章列表 -->
           <nuxt-child />
         </div>
@@ -96,4 +98,19 @@ export default {
 .article-label:hover {
   background: #f45154;
 }
+.banner .el-carousel__item h3 {
+    color: #475669;
+    font-size: 14px;
+    opacity: 0.75;
+    line-height: 200px;
+    margin: 0;
+  }
+  
+  .banner .el-carousel__item:nth-child(2n) {
+    background-color: #99a9bf;
+  }
+  
+  .banner .el-carousel__item:nth-child(2n+1) {
+    background-color: #d3dce6;
+  }
 </style>

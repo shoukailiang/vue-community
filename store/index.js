@@ -9,7 +9,6 @@ const state = () => ({
 const mutations = {
     // 状态置空
     RESET_USER_STATE(state) {
-        // 状态置空
         state.userInfo = null
         state.accessToken = null
         state.refreshToken = null
@@ -37,19 +36,14 @@ const actions = {
         // 更新状态值
         commit('UPDATE_ALL_STATE', data)
     },
-   // 跳转登录页
     LoginPage ({commit}) {
         // 重置用户状态
         commit('RESET_USER_STATE')
-        // 跳转到认证客户端（登录页）， redirectURL 作为请求参数，参数值是引发跳转的地址
-        // window 是属于浏览器的对象，所以在触发这个action时，只能在客户端中进行触发 ，不能在服务端进行触发（asyncData）
         window.location.href = `${process.env.authURL}?redirectURL=${window.location.href}`
     },
 
     UserLogout({commit}) {
-        // 1. 重置状态
         commit('RESET_USER_STATE')
-        // 2. 跳转认证客户端实现退出
         window.location.href = `${process.env.authURL}/logout?redirectURL=${window.location.href}`
     }
 }

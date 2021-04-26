@@ -37,9 +37,9 @@
       </el-form-item>
       <el-form-item label="主图：" prop="imageUrl">
         <!-- 
-                    action 上传图片的调用地址，不用它，
-                    accept 接收上传的类型，图片
-                    show-file-list 是否列表展示上传的文件，因为只传一张图片，不要显示列表
+          action 上传图片的调用地址，不用它，
+          accept 接收上传的类型，图片
+          show-file-list 是否列表展示上传的文件，因为只传一张图片，不要显示列表
         -->
         <el-upload
           class="avatar-uploader"
@@ -76,9 +76,9 @@
 
       <el-form-item label="内容：" prop="content">
         <!-- 
-                    ref 就是唯一标识，相关于id
-                    v-model 绑定的markdown输入 框的内容
-                    @change   获得md的html的内容
+          ref 就是唯一标识，相关于id
+          v-model 绑定的markdown输入 框的内容
+          @change   获得md的html的内容
         -->
         <client-only>
           <mavon-editor
@@ -101,7 +101,6 @@
 
 <script>
 export default {
-  // 引用中间件，拦截路由请求，判断是否已经身份认证
     middleware: 'auth',
   // 校验 query   http://localhost:3000/article/edit?id=10
   validate({ query }) {
@@ -113,18 +112,15 @@ export default {
   },
 
   data() {
-    // 自定义校验器，当所给无法满足时
     const validateLable = (rule, value, callback) => {
-      // value 里面的内筒，应为在这里是个数据所以有length
       if (value && value.length > 5) {
-        this.disabled = true; // 禁止选择，input框禁止掉
+        this.disabled = true; 
         callback(new Error("最多可选5个标签"));
       } else {
-        this.disabled = false; // 可以选择
+        this.disabled = false; 
         callback(); // 校验通过，直接放行
       }
     };
-    // 自定义校验器，自定义的组件无法直接使用{ required: true, message: "请输入标题", trigger: "blur" }
     const validateContent = (rule, value, callback) => {
       if (this.formData.mdContent && this.formData.htmlContent) {
         callback(); // 校验通过，直接放行
@@ -135,15 +131,15 @@ export default {
 
     return {
       rules: {
-        title: [{ required: true, message: "请输入标题", trigger: "blur" }],
+        title: [{ required: true, message: "请查看是否忘了标题？", trigger: "blur" }],
         labelIds: [
-          { required: true, message: "请选择标签", trigger: "blur" },
+          { required: true, message: "请查看是否忘了标签", trigger: "blur" },
           { validator: validateLable, trigger: "change" },
         ],
         ispublic: [
-          { required: true, message: "请选择是否公开", trigger: "change" },
+          { required: true, message: "请查看选择是否公开", trigger: "change" },
         ],
-        summary: [{ required: true, message: "请输入简介", trigger: "blur" }],
+        summary: [{ required: true, message: "请查看是否忘了简介", trigger: "blur" }],
         content: [{ validator: validateContent, trigger: "change" }],
       },
       formData: {
@@ -250,7 +246,6 @@ export default {
         });
     },
 
-    // 删除图片
     deleteImg() {
       if (this.formData.imageUrl) {
         // 如果有原图地址，则删除它，

@@ -59,9 +59,7 @@
 
 <script>
 export default {
-  // 引用中间件，拦截路由请求，判断是否已经身份认证
     middleware: 'auth',
-  // 校验
   validate({ query }) {
     // 如果有传递id,则是修改
     if (query.id) {
@@ -198,7 +196,6 @@ export default {
         });
     },
 
-    // 删除图片
     deleteImg() {
       if (this.formData.imageUrl) {
         // 如果有原图地址，则删除它，

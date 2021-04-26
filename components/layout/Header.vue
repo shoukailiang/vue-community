@@ -128,12 +128,10 @@ export default {
       }
       switch (command) {
         case "article":
-          // 打开新窗口
           let routeData = this.$router.resolve("/article/edit");
           window.open(routeData.href, "_blank");
           break;
         case "question":
-          // 打开新窗口
           routeData = this.$router.resolve("/question/edit");
           window.open(routeData.href, "_blank");
           break;
@@ -145,7 +143,6 @@ export default {
           window.open("http://localhost:9528", "_blank");
           break;
         case "logout":
-          // 触发UserLogout
           this.$store.dispatch("UserLogout");
           break;
         default:
