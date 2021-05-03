@@ -17,7 +17,7 @@
                 </nuxt-link>
                 <span>
                   <i class="el-icon-date"></i>
-                  {{ getDateFormat(data.updateDate) }}
+                  {{ data.updateDate|getDateFormat }}
                   <i class="el-icon-thumb"></i> {{ data.thumhup }}
                   <i class="el-icon-view"></i> {{ data.viewCount }}
                 </span>
@@ -183,9 +183,7 @@ export default {
     return { data, commentList };
   },
   methods: {
-    getDateFormat(date) {
-      return dateFormat(date);
-    },
+
     async handleThumb() {
       this.isThumb = !this.isThumb;
       // 1. 点赞，-1取消赞
@@ -246,6 +244,11 @@ export default {
       this.commentList = data;
     },
   },
+  filters:{
+    getDateFormat(date) {
+      return dateFormat(date);
+    },
+  }
 };
 </script>
 <style scoped>

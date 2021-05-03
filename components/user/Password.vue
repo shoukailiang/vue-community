@@ -84,7 +84,6 @@ export default {
   },
 
   data() {
-    // 在 return 上面进行申明自定校验
     const validateOldPassword = (rule, value, callback) => {
       if (!value || value.length < 6) {
         callback(new Error("请输入正确的原密码"));

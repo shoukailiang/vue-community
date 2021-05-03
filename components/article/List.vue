@@ -21,7 +21,7 @@
           <div class="info">
             <i class="el-icon-user"></i>{{ scope.row.nickName }} &nbsp;
             <i class="el-icon-date"></i>
-            {{ getDateFormat(scope.row.updateDate) }}
+            {{ scope.row.updateDate|getDateFormat }}
           </div>
         </template>
       </el-table-column>
@@ -93,10 +93,14 @@ export default {
       // 触发父组件事件查询数据(父组件事件名，标签页名称, 当前页码)
       this.$emit("fetch-data", this.name, current);
     },
+
+
+  },
+  filters:{
     getDateFormat(date) {
       return dateFormat(date);
     },
-  },
+  }
 };
 </script>
 

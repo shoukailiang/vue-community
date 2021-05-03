@@ -18,7 +18,7 @@
                 </nuxt-link>
                 <span>
                   <i class="el-icon-date"></i>
-                  {{ getDateFormat(data.updateDate) }}
+                  {{ data.updateDate|getDateFormat }}
                   <i class="el-icon-thumb"></i> {{ data.thumhup }}
                   <i class="el-icon-view"></i> {{ data.viewCount }}
                 </span>
@@ -170,9 +170,7 @@ export default {
   },
 
   methods: {
-    getDateFormat(date) {
-      return dateFormat(date);
-    },
+
 
     async handleThumb() {
       this.isThumb = !this.isThumb;
@@ -270,6 +268,11 @@ export default {
       } else {
         this.$message.error("请输入回答内容");
       }
+    },
+  },
+  filters:{
+    getDateFormat(date) {
+      return dateFormat(date);
     },
   },
 

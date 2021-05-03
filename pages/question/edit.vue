@@ -59,7 +59,7 @@
 
 <script>
 export default {
-    middleware: 'auth',
+  middleware: 'auth',
   validate({ query }) {
     // 如果有传递id,则是修改
     if (query.id) {

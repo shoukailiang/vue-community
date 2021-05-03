@@ -1,10 +1,10 @@
 <template>
   <div>
     <!-- 显示评论内容区域 -->
-    <div v-for="(item, index) in commentList" class="hbl-child" :key="index">
+    <div v-for="(item, index) in commentList" class="hbl-child" :key="index" >
       <div class="reply"></div>
       <!-- 一级评论 -->
-      <div class="content">
+      <div class="content" >
         <div class="comment-f">
           <el-avatar icon="el-icon-user-solid" :src="item.userImage" />
         </div>
@@ -16,12 +16,11 @@
             <div v-if="item.userId === authorId" class="icon author">
               {{ label }}
             </div>
-            <div class="date">{{ getDateFormat(item.createDate) }}</div>
+            <div class="date">{{ item.createDate|getDateFormat }}</div>
           </div>
         </div>
 
         <!-- 一级评论内容显示 -->
-
         <div class="reply-content">
           <!-- @父评论作者名 只在子评价时才显示 -->
           <div class="cc cc-to" v-if="parentName">
@@ -39,7 +38,6 @@
         <!-- 回复按钮 -->
         <div class="reply-content reply-fa">
           <div class="reply-font">
-            <!-- <img src="./img/icon/reply.png" class="icon-reply" /> -->
             <font
               v-if="userId && item.userId !== userId"
               class="icon-reply icon-hf"
@@ -94,8 +92,6 @@
               </div>
 
               <div class="publish publish-btn">
-                <!-- <button class="btn" @click="doChildSend(item.id,item.commentUser.id,item.id)">发送</button>
-                <button @click="cancel(item.id)" class="btn btn-cancel">取消</button>-->
                 <el-button
                   @click="sendChild(index, item.id)"
                   size="mini"
@@ -123,7 +119,6 @@
         :doRemove="doRemove"
         :emojiWidth="emojiWidth"
         :userImage="userImage"
-        :showComment="showComment"
         :placeholder="placeholder"
         :minRows="minRows"
         :maxRows="maxRows"
@@ -145,11 +140,6 @@ export default {
       // 父评论作者名
       type: String,
       default: null,
-    },
-    showComment: {
-      // 显示评价输入框
-      type: Boolean,
-      default: true,
     },
     emojiWidth: {
       type: String,
@@ -182,7 +172,7 @@ export default {
         {
           id: "20",
           userId: "1",
-          nickName: "小梦",
+          nickName: "skl",
           userImage:
             "http://qzapp.qlogo.cn/qzapp/101483738/6637A2B6611592A44A7699D14E13F7F7/50",
           content: "[害羞][害羞][害羞]<br/>",
@@ -193,7 +183,7 @@ export default {
               userId: "2",
               userImage:
                 "http://qzapp.qlogo.cn/qzapp/101483738/6637A2B6611592A44A7699D14E13F7F7/50",
-              nickName: "梦学谷",
+              nickName: "寿恺梁",
               content: "真的就很棒！很Nice!",
               createDate: "2019-9-23 17:45:26",
             },
@@ -364,21 +354,14 @@ export default {
     pBodyStatus(index) {
       this.$set(this.pBodyMap, index, !this.pBodyMap[index]);
     },
-        // 格式化日期
+
+  },
+  filters:{
+    // 格式化日期
     getDateFormat(date) {
       return dateFormat(date);
     },
-  },
-  watch: {
-    // 如果路由有变化，会再次执行该方法
-    // '$route':'routeChange'
-  },
-  created() {
-    //生命周期函数
-  },
-  mounted() {
-    //页面加载完成后
-  },
+  }
 };
 </script>
 

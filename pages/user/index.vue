@@ -107,8 +107,7 @@ export default {
         imageUrl: "",
       },
       passwordData: {
-        // 修改密码表单
-        userId: this.$store.state.userInfo && this.$store.state.userInfo.uid,
+        
       },
       questionList: [], // 提问列表
       FocusData: [],
@@ -172,7 +171,6 @@ export default {
           this.getMyFocus(tab.paneName, 1);
           break;
         case "user":
-          // 用户不用查询，在加载此页面时已经查询了
           break;
       }
     },

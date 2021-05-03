@@ -25,7 +25,7 @@
   </el-card>
 </template>
 
- <script>
+<script>
 export default {
   props: {
     parentClass: {

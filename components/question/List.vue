@@ -26,7 +26,7 @@
           <div class="info">
             <i class="el-icon-user"></i>{{ scope.row.nickName }} &nbsp;
             <i class="el-icon-date"></i>
-            {{ getDateFormat(scope.row.createDate) }}
+            {{ scope.row.createDate|getDateFormat }}
           </div>
         </template>
       </el-table-column>
@@ -103,10 +103,13 @@ export default {
       this.$emit("fetch-data", this.name, current);
     },
 
+
+  },
+  filters:{
     getDateFormat(date) {
       return dateFormat(date);
     },
-  },
+  }
 };
 </script>
 

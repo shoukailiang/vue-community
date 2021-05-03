@@ -69,7 +69,6 @@
       :authorId="authorId"
       :doChildSend="doChildSend"
       :doRemove="doRemove"
-      :showComment="showComment"
       :emojiWidth="emojiWidth"
       :userImage="userImage"
       :placeholder="placeholder"
@@ -135,7 +134,7 @@ export default {
         {
           id: "20",
           userId: "1",
-          nickName: "小梦",
+          nickName: "skl",
           userImage:
             "http://qzapp.qlogo.cn/qzapp/101483738/6637A2B6611592A44A7699D14E13F7F7/50",
           content: "[害羞][害羞][害羞]<br/>",
@@ -146,7 +145,7 @@ export default {
               userId: "2",
               userImage:
                 "http://qzapp.qlogo.cn/qzapp/101483738/6637A2B6611592A44A7699D14E13F7F7/50",
-              nickName: "梦学谷",
+              nickName: "寿恺梁",
               content: "真的就很棒！很Nice!",
               createDate: "2019-9-23 17:45:26",
             },
@@ -161,7 +160,7 @@ export default {
   },
   data() {
     return {
-      replyMap: [],
+      // replyMap: [],
       buttonMap: [],
       pBodyMap: [],
       textareaMap: [],
@@ -256,11 +255,6 @@ export default {
     },
     cancel(index) {
       this.$set(this.buttonMap, index, false);
-      if (index !== 0) {
-        this.$set(this.replyMap, index, false);
-      }
-      // console.log(index + "index");
-      //this.showFlag = false;
     },
     // 评论
     doSend() {
@@ -311,24 +305,9 @@ export default {
       }
       return str;
     },
-    doReply(index) {
-      this.$set(this.replyMap, index, true);
-      // console.log(this.replyMap[index]);
-    },
-
     pBodyStatus(index) {
       this.$set(this.pBodyMap, index, !this.pBodyMap[index]);
     },
-  },
-  watch: {
-    // 如果路由有变化，会再次执行该方法
-    // '$route':'routeChange'
-  },
-  created() {
-    //生命周期函数
-  },
-  mounted() {
-    //页面加载完成后
   },
 };
 </script>
