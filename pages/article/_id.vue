@@ -65,7 +65,7 @@
             <!-- 未登录 -->
             <el-card v-if="!$store.state.userInfo">
               <h4>
-                登录后参与交流、获取后续更新提醒
+                请登录
               </h4>
               <div>
                 <el-button

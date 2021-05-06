@@ -33,6 +33,6 @@ export default ({ $axios }, inject) => {
     inject('updateQuestion', data => $axios.$put(`/question/question`, data))
 
     // 通过标签id查询问题列表
-    inject('getQuestionByLableId', (page, labelId) => $axios.$post(`/question/api/question/list/${labelId}`, page))
+    inject('getQuestionByLableId', (data) => $axios.$post(`/question/api/question/list`, data))
 
 }

@@ -48,7 +48,7 @@ export default {
 
   data() {
     return {
-      articleList: [], // 文章列表数据
+      articleList: [], 
     };
   },
 
@@ -61,18 +61,16 @@ export default {
     // 切换页码时查询（标签页的名字，当前页码）
     async fetchData(paneName, current) {
       this.page.current = current;
-      // 请求接口响应的对象
       let response = null;
       switch (paneName) {
         case "question":
           // 查询技术问答列表
-          response = await this.$getQuestionByLableId(
-            this.page,
-            this.$route.params.id
-          );
-          // 将新数据重新赋值
+          const query2 = { ...this.page, labelId: this.$route.params.id };
+          response = await this.$getQuestionByLableId(query2);
+          
           this.page.total = response.data.total;
           this.questionList = response.data.records;
+          console.log(response)
           break;
         case "article":
           // 封装标签id,和分页对象{current: 1, size: 20, total: 0, labelId: 10}
@@ -88,14 +86,13 @@ export default {
   },
 
   async asyncData({ params, app }) {
-    // 首次加载页面，查询技术问答列表
     const page = {
       current: 1,
       size: 8,
       total: 0,
     };
-    // 查询
-    const { data } = await app.$getQuestionByLableId(page, params.id);
+    const query = { ...page, labelId: params.id };
+    const { data } = await app.$getQuestionByLableId(query);
     page.total = data.total;
 
     return { page, questionList: data.records };

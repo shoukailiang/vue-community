@@ -80,7 +80,7 @@
           <div>
             <h2>编写回答</h2>
             <el-card v-if="!$store.state.userInfo">
-              <h4>登录后参与交流、获取后续更新提醒</h4>
+              <h4>请登录</h4>
               <div>
                 <el-button
                   @click="$store.dispatch('LoginPage')"
