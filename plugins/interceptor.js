@@ -1,7 +1,6 @@
 export default ({ store, route, redirect, $axios }) => {
 
     $axios.onRequest(config => {
-        // console.log("请求拦截器")
         const accessToken = store.state.accessToken
         if (accessToken) {
             // Authorization: Bearer token
@@ -12,13 +11,11 @@ export default ({ store, route, redirect, $axios }) => {
     })
 
     $axios.onResponse(response => {
-        // console.log('响应拦截器：', response)
         return response
     })
 
 
     $axios.onError(error => {
-        // console.log('响应异常：', error.response.status)
         if (error.response.status != 401) {
             return Promise.reject(error)
         }
@@ -41,7 +38,6 @@ const sendRefreshRequest = (route, store, redirect) => {
         isLock = true
         // 没有刷新令牌，跳转到登录页
         // 重置用户状态
-        // console.log('跳转到登录页')
         store.commit('RESET_USER_STATE')
         // 跳转到登录页
 

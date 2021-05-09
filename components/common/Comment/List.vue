@@ -289,7 +289,6 @@ export default {
     },
     showButton(index) {
       //this.showFlag = true;
-      // console.log(index + "index");
       this.$set(this.buttonMap, index, true);
       this.pBodyClose(index);
     },
@@ -302,7 +301,6 @@ export default {
     // 回复评论
     sendChild(index, pid) {
       this.doChildSend(this.textareaMap[index], pid);
-      // console.log(index, 'textareaMap', this.textareaMap)
       // this.$emit("doChildSend", this.textareaMap[index], pid);
       this.$set(this.textareaMap, index, "");
       this.cancel(index);
@@ -347,8 +345,6 @@ export default {
     },
     doReply(index) {
       this.$set(this.replyMap, index, true);
-      // console.log('replyMap', this.replyMap, index)
-      // console.log(this.replyMap[index]);
     },
 
     pBodyStatus(index) {

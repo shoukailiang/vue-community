@@ -203,13 +203,11 @@ export default {
     },
     // 公布评论
     doSend(content) {
-      // console.log("公布评论", content);
       this.doChildSend(content);
     },
     // 发布回复评论（回复内容，父评论id)
     // -1 表示没有父评论
     doChildSend(content, parentId = "-1") {
-      // console.log("发布回复评论（回复内容，父评论id", content, parentId);
       const data = {
         content,
         parentId,
@@ -237,7 +235,6 @@ export default {
 
     // 查询评论列表数据
     async refreshComment() {
-      // console.log("refreshComment");
       const { data } = await this.$getCommentListByArticleId(
         this.$route.params.id
       );

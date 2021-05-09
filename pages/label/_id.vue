@@ -70,7 +70,6 @@ export default {
           
           this.page.total = response.data.total;
           this.questionList = response.data.records;
-          console.log(response)
           break;
         case "article":
           // 封装标签id,和分页对象{current: 1, size: 20, total: 0, labelId: 10}

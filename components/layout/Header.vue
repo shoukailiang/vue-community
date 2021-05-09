@@ -103,7 +103,6 @@ export default {
     },
     // 高亮显示哪个导航标签
     defaultActive() {
-      // console.log("this.$route.path", this.$route.matched[0].path);
       // 是否存在多级子路由, 没有值，则是首页/
       let routePath = this.$route.matched[0].path || "/";
 

@@ -27,12 +27,10 @@ const mutations = {
 const actions = {
     // nuxt提供的，每次发送请求都会先调用此方法 ，并且第1个参数store, 该方法的第2个参数是context, 
     nuxtServerInit({commit}, {app}) {
-        // console.log('nuxtServerInit', app)
         const data = {}
         data.userInfo = app.$cookies.get('userInfo')
         data.accessToken = app.$cookies.get('accessToken')
         data.refreshToken = app.$cookies.get('refreshToken')
-        // console.log('data', data)
         // 更新状态值
         commit('UPDATE_ALL_STATE', data)
     },

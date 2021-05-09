@@ -192,7 +192,6 @@ export default {
 
     // 发布回复评论（回复内容，父评论id)
     doChildSend(htmlContent, parentId = "-1", mdContent = "") {
-      // console.log('发布回复评论（回复内容，父评论id', content, parentId)
       const data = {
         htmlContent, // 存放回复信息，回答中的md格式内容也是传到这个属性中
         mdContent, // md格式内容
@@ -213,7 +212,6 @@ export default {
     },
 
     async doRemove(id) {
-      //    console.log(id, 'xxxxx')
       const { code } = await this.$deleteReplayById(id);
       if (code === 20000) {
         // 删除成功，刷新评论
@@ -223,7 +221,6 @@ export default {
 
     // 查询评论列表数据
     async refreshReplay() {
-      //    console.log('refreshReplay')
       const { data } = await this.$getReplayByQuestionById(
         this.$route.params.id
       );
@@ -283,7 +280,6 @@ export default {
     if (!isView) {
       // 没有值 ，可以更新浏览数
       const { code } = await app.$updateQuestionViewCount(params.id);
-      console.log(code);
       if (code === 20000) {
         // 将此问题浏览数+1
         app.$cookies.set(`question-view-${params.id}`, true);

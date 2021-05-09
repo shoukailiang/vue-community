@@ -56,7 +56,6 @@ export default {
   methods: {
     // 点击标签时触发
     handleClick(tab) {
-      // console.log(tab.paneName);
       this.fetchData(tab.paneName,1);
     },
     // 获取数据，子组件List会传递参数(标签名，当前页码)

@@ -85,7 +85,6 @@ export default {
 
   async asyncData({ params, app, route }) {
     // 获取文章列表
-    // console.log(route)
     const query = {
       current: route.query.current,
       size: route.query.size,

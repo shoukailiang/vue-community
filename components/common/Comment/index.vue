@@ -249,7 +249,6 @@ export default {
     },
     showButton(index) {
       //this.showFlag = true;
-      // console.log(index + "index");
       this.$set(this.buttonMap, index, true);
       this.pBodyClose(index);
     },
@@ -258,7 +257,6 @@ export default {
     },
     // 评论
     doSend() {
-      //console.log("====="+this.textarea);
       // textareaMap[0]公共评论区的内容
       this.$emit("doSend", this.textareaMap[0]);
       this.$set(this.textareaMap, 0, "");

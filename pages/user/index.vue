@@ -194,7 +194,6 @@ export default {
             this.userInfo.imageUrl = response.data;
 
             const {email,imageUrl,mobile,nickName,id,username} = this.userInfo;
-            // console.log(this.userInfo)
             var new_info={
               email,
               imageUrl,

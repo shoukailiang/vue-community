@@ -156,7 +156,6 @@ export default {
 
     async submitData() {
       let resp = null;
-      // console.log('this.formData', this.formData)
       // 有文章id则修改，没有id则是新增
       if (this.formData.id) {
         // 修改
@@ -177,7 +176,6 @@ export default {
 
     uploadMainImg(file) {
       // 上传主图片
-      // console.log('上传主图片file', file)
       // 封装上传图片的表单对象
       const data = new FormData();
       data.append("file", file.file);
@@ -205,15 +203,12 @@ export default {
 
     // mdContent md内容，htmlContent 转成html的内容
     getMdHtml(mdContent, htmlContent) {
-      // console.log('mdContent', mdContent)
-      // console.log('htmlContent', htmlContent)
       this.formData.mdContent = mdContent;
       this.formData.htmlContent = htmlContent;
     },
 
     // 上传内容图片（图片位置编号，File对象）
     uploadContentImg(pos, file) {
-      // console.log('上传内容图片：', file)
       // 封装表单数据
       const fd = new FormData();
       fd.append("file", file);
@@ -230,7 +225,6 @@ export default {
     delConentImg(urlAndFileArr) {
       const fileUrl = urlAndFileArr[0]; //图片url
       const file = urlAndFileArr[1]; //File对象
-      // console.log('删除内容图片', fileUrl, file)
       // 删除内容图片
       this.$deleteImg(fileUrl);
     },
@@ -243,7 +237,6 @@ export default {
     // 查询文章详情
     if (query.id) {
       const { data: formData } = await app.$getQuestionById(query.id);
-      //   console.log('formData', formData)
       return { labelOptions: data, formData };
     }
 

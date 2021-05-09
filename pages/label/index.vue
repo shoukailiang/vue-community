@@ -58,7 +58,6 @@ export default {
     const { data } = await app.$getCategoryAndLabel();
     const { data: hotTagList } = await app.$hotTagList();
 
-    // console.log(data)
     return { data, hotTagList };
   },
 };
