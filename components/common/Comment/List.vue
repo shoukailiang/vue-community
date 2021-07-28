@@ -16,7 +16,7 @@
             <div v-if="item.userId === authorId" class="icon author">
               {{ label }}
             </div>
-            <div class="date">{{ item.createDate|getDateFormat }}</div>
+            <div class="date">{{ item.gmtCreate|getDateFormat }}</div>
           </div>
         </div>
 
@@ -176,7 +176,7 @@ export default {
           userImage:
             "http://qzapp.qlogo.cn/qzapp/101483738/6637A2B6611592A44A7699D14E13F7F7/50",
           content: "[害羞][害羞][害羞]<br/>",
-          createDate: "2019-9-23 17:36:02",
+          gmtCreate: "2019-9-23 17:36:02",
           children: [
             {
               id: "30",
@@ -185,7 +185,7 @@ export default {
                 "http://qzapp.qlogo.cn/qzapp/101483738/6637A2B6611592A44A7699D14E13F7F7/50",
               nickName: "寿恺梁",
               content: "真的就很棒！很Nice!",
-              createDate: "2019-9-23 17:45:26",
+              gmtCreate: "2019-9-23 17:45:26",
             },
           ],
         },

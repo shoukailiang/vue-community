@@ -26,7 +26,7 @@
           <div class="info">
             <i class="el-icon-user"></i>{{ scope.row.nickName }} &nbsp;
             <i class="el-icon-date"></i>
-            {{ scope.row.createDate|getDateFormat }}
+            {{ scope.row.gmtCreate|getDateFormat }}
           </div>
         </template>
       </el-table-column>
@@ -70,7 +70,7 @@ export default {
             viewCount: 100,
             title: "vue.config.js 如何配置动态的代理域名",
             nickName: " 梦者1",
-            createDate: "2022-12-12",
+            gmtCreate: "2022-12-12",
           },
           {
             id: "12",
@@ -78,7 +78,7 @@ export default {
             viewCount: 80,
             title: "vue.config.js 如何配置动态的代理域名",
             nickName: " 梦者2",
-            createDate: "2022-12-12",
+            gmtCreate: "2022-12-12",
           },
         ];
       },

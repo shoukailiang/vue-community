@@ -17,7 +17,7 @@
                 </nuxt-link>
                 <span>
                   <i class="el-icon-date"></i>
-                  {{ data.updateDate|getDateFormat }}
+                  {{ data.gmtModified|getDateFormat }}
                   <i class="el-icon-thumb"></i> {{ data.thumhup }}
                   <i class="el-icon-view"></i> {{ data.viewCount }}
                 </span>

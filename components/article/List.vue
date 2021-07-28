@@ -21,7 +21,7 @@
           <div class="info">
             <i class="el-icon-user"></i>{{ scope.row.nickName }} &nbsp;
             <i class="el-icon-date"></i>
-            {{ scope.row.updateDate|getDateFormat }}
+            {{ scope.row.gmtModified|getDateFormat }}
           </div>
         </template>
       </el-table-column>
@@ -63,14 +63,14 @@ export default {
             viewCount: 100,
             title: "热门头条配置动态的代理域名",
             nickName: " 梦者1",
-            updateDate: new Date(),
+            gmtModified: new Date(),
           },
           {
             id: "12",
             viewCount: 80,
             title: "使用配置动态的代理域名",
             nickName: " 梦者2",
-            updateDate: new Date(),
+            gmtModified: new Date(),
           },
         ];
       },
