@@ -18,7 +18,7 @@
                 </nuxt-link>
                 <span>
                   <i class="el-icon-date"></i>
-                  {{ data.gmtModified|getDateFormat }}
+                  {{ data.gmtModified | getDateFormat }}
                   <i class="el-icon-thumb"></i> {{ data.thumhup }}
                   <i class="el-icon-view"></i> {{ data.viewCount }}
                 </span>
@@ -170,8 +170,6 @@ export default {
   },
 
   methods: {
-
-
     async handleThumb() {
       this.isThumb = !this.isThumb;
       // 1. 点赞，-1取消赞
@@ -267,7 +265,7 @@ export default {
       }
     },
   },
-  filters:{
+  filters: {
     getDateFormat(date) {
       return dateFormat(date);
     },

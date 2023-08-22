@@ -8,7 +8,7 @@ export default ({ $axios }, inject) => {
     // 等待回答
     inject('getWaitList', page => $axios.$post('/question/api/question/wait', page))
 
-    // 查询问题详情 
+    // 查询问题详情
     inject('getQuestionById', id => $axios.$get(`/question/api/question/${id}`))
 
     // 更新浏览数
@@ -33,6 +33,6 @@ export default ({ $axios }, inject) => {
     inject('updateQuestion', data => $axios.$put(`/question/question`, data))
 
     // 通过标签id查询问题列表
-    inject('getQuestionByLableId', (data) => $axios.$post(`/question/api/question/list`, data))
+    inject('getQuestionByLableId', (data) => $axios.$post(`/question/api/question/list/${data.labelId}`, data))
 
 }
